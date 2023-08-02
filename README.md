@@ -11,6 +11,12 @@
 \
 Migrate database\
 `alembic upgrade head`\
+
+Display raw SQL\
+`alembic upgrade head --sql`
+
+Reset database\
+`alembic downgrade base && alembic upgrade head`
 https://alembic.sqlalchemy.org/en/latest/
 \
 Run the server manually\
@@ -24,3 +30,14 @@ environment variable required
 - DATABASE_PORT
 - DATABASE_PASSWORD
 - DATABASE_USERNAME
+
+\
+Using Docker\
+`docker-compose up -d`\
+Stop containers\
+`docker-compose down`
+
+\
+To do:
+- Fix backend testing
+- Add comments
