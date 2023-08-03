@@ -10,7 +10,7 @@
 `cd onboarding-backend`\
 \
 Migrate database\
-`alembic upgrade head`\
+`alembic upgrade head`
 
 Display raw SQL\
 `alembic upgrade head --sql`
@@ -40,4 +40,3 @@ Stop containers\
 \
 To do:
 - Fix backend testing
-- Add comments

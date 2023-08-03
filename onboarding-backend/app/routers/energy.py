@@ -15,9 +15,9 @@ router = APIRouter(
 def get_energy(postcode: int, year: int, energy_type: str, db: Session = Depends(get_db)):
     """This function returns the energy data for a given postcode, year and energy type.
     """
-    
+    # Lowercase the energy type
     energy_type = energy_type.lower()
-
+    # Query the database for the energy data for the given postcode, year and energy type
     data = (
         db.query(models.Energy)
         .filter(models.Energy.postcode == postcode)
