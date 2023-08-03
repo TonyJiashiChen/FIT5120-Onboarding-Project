@@ -149,7 +149,8 @@ export function Welcome({
         )}
         renderInput={(params) => <TextField {...params} label="Enter your suburb" helperText="Compare your carbon consumption with your neighbors." />}
         getOptionLabel={(option) => option.suburb}
-        />
+        disableClearable
+      />
 
       <Typography variant="h5" component="div" sx={{ flexGrow: 1, marginTop: '2rem' }}>
         Select a time period to visualize

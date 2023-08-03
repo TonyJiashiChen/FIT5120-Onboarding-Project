@@ -6,6 +6,7 @@ import { StepIndicator } from "../components/StepIndicator";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 
+// steps for carbon footprint calculator
 const steps = [
   {
     title: 'Welcome',
@@ -17,9 +18,13 @@ const steps = [
 ]
 
 export function Main() {
+  // current active step
   const [activeStep, setActiveStep] = useState(0);
+  // postcode info
   const [postcode, setPostcode] = useState('');
+  // surburb info, default to first option, structure in Welcome.jsx and according to API doc
   const [suburb, setSuburb] = useState('');
+  // timeframe in months
   const [timeframe, setTimeframe] = useState('');
   const nextStep = () => {
     setActiveStep(activeStep + 1);
