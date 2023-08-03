@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import cast, String
 
@@ -7,7 +7,7 @@ from ..database import get_db
 from .. import models, schemas
 
 router = APIRouter(
-    prefix="/location",
+    prefix="/api/location",
     tags=["location"],
 )
 
@@ -17,9 +17,13 @@ def get_location(db: Session = Depends(get_db), postcode: int = None, suburb: st
     if postcode is None:
         return db.query(models.Location).filter(models.Location.suburb.ilike(f"%{suburb}%")).all()
 
-    locations_query = (
+    data = (
         db.query(models.Location)
         .filter(cast(models.Location.postcode, String).contains(str(postcode)))
         .filter(models.Location.suburb.ilike(f"%{suburb}%"))
-        )
-    return locations_query.all()
+        ).all()
+
+    if data == None:
+        raise HTTPException(status_code=404, detail="Location not found")
+
+    return data

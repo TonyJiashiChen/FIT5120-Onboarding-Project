@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import energy, location
-
-app = FastAPI()
+app = FastAPI(
+    docs_url="/api/docs"
+)
 
 origins = ["*"]
 app.add_middleware(
@@ -17,6 +18,6 @@ app.add_middleware(
 app.include_router(energy.router)
 app.include_router(location.router)
 
-@app.get('/')
+@app.get('/api')
 def root():
     return {"message": "Hello"}
