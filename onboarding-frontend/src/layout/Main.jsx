@@ -18,6 +18,9 @@ const steps = [
 
 export function Main() {
   const [activeStep, setActiveStep] = useState(0);
+  const [postcode, setPostcode] = useState('');
+  const [suburb, setSuburb] = useState('');
+  const [timeframe, setTimeframe] = useState('');
   const nextStep = () => {
     setActiveStep(activeStep + 1);
   }
@@ -35,7 +38,13 @@ export function Main() {
                 activeStep,
                 steps,
                 nextStep,
-                lastStep
+                lastStep,
+                suburb,
+                setSuburb,
+                postcode,
+                setPostcode,
+                timeframe,
+                setTimeframe
               })
           }
         </Paper>
