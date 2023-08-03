@@ -124,7 +124,7 @@ export function Welcome({
   }, [setSuburb, setPostcode]);
   return (
     <>
-      <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+      <Typography variant="h4" component="div" sx={{ flexGrow: 1, marginTop: '1rem' }}>
         Welcome to the Carbon Visualizer!
       </Typography>
       <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>

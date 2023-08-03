@@ -5,6 +5,7 @@ import { InfoInput } from "../components/InfoInput";
 import { StepIndicator } from "../components/StepIndicator";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import { Result } from "../components/Result";
 
 // steps for carbon footprint calculator
 const steps = [
@@ -14,6 +15,9 @@ const steps = [
   }, {
     title: 'Info',
     component: <InfoInput />
+  }, {
+    title: 'Result',
+    component: <Result />
   }
 ]
 
