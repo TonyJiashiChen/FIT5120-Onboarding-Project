@@ -9,6 +9,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useTheme } from "@mui/material";
 
+/*
+const get_options = async () => {
+  const response = await fetch('http://localhost:8000/api/location');
+  const options = await response.json();
+  console.log(options);
+}
+get_suburb();
+*/
+
 const options = [
   {
     "postcode": 3802,

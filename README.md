@@ -5,7 +5,19 @@
 `cd onboarding-frontend`\
 `npm start`
 
-**Backend**\
+
+**Using Docker for the frontend and backend (Dev)**\
+`docker-compose up -d`\
+To rebuild image\
+`docker-compose up -d --build`\
+To stop containers\
+`docker-compose down`
+
+After containers initialise for the first time
+Run `alembic upgrade head` in the backend container to migrate data in the database
+
+
+**Backend (manually)**\
 \
 `cd onboarding-backend`\
 \
@@ -30,13 +42,3 @@ environment variable required
 - DATABASE_PORT
 - DATABASE_PASSWORD
 - DATABASE_USERNAME
-
-\
-Using Docker\
-`docker-compose up -d`\
-Stop containers\
-`docker-compose down`
-
-\
-To do:
-- Fix backend testing
