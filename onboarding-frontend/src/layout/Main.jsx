@@ -29,7 +29,10 @@ export function Main() {
   // surburb info, default to first option, structure in Welcome.jsx and according to API doc
   const [suburb, setSuburb] = useState('');
   // timeframe in months
-  const [timeframe, setTimeframe] = useState('');
+  const [timeframe, setTimeframe] = useState({
+    label: 'One Month',
+    value: 1,
+  });
   // electronic carbon emission
   const [electricity, setElectricity] = useState(0);
   // gas carbon emission

@@ -83,18 +83,12 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
         </Typography>
       </Grid>
       <Grid item>
-        <Button sx={{marginTop: '2rem', marginRight: '1rem'}} variant="contained" onClick={lastStep}>
+        <Button sx={{marginTop: '2rem', marginRight: '1rem'}} variant="outlined" onClick={lastStep}>
           Back
         </Button>
-        {activeStep === steps.length - 1 ? (
-          <Button sx={{marginTop: '2rem'}} variant="contained" onClick={nextStep}>
-            Finish
-          </Button>
-        ) : (
-          <Button sx={{marginTop: '2rem'}} variant="contained" onClick={nextStep}>
-            Next
-          </Button>
-        )}
+        <Button sx={{marginTop: '2rem'}} variant="contained" onClick={nextStep}>
+          GET RESULT
+        </Button>
       </Grid>
     </>
   );

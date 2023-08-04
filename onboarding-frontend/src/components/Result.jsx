@@ -29,7 +29,8 @@ export function Result({
   electricity,
   gas,
   car,
-  result
+  result,
+  timeframe
 }) {
   const theme = useTheme();
   const data = useMemo(() => ({
@@ -46,10 +47,22 @@ export function Result({
         backgroundColor: theme.palette.secondary.main
       }
     ]
-  }), [car, electricity, gas]);
+  }), [car, electricity, gas, theme.palette.primary.main, theme.palette.secondary.main]);
+
+  const convertToYearly = (value) => {
+    return 12 / timeframe.value * value;
+  }
+
+  const getPlaneKm = () => {
+    return (convertToYearly(result) / 0.115).toFixed(2);
+  }
+
   return (
     <>
-      <Typography variant="h4" sx={{marginTop: '1rem'}}>Your carbon footprint is <b style={{color: theme.palette.primary.main}}>{result.toFixed(2)} kg</b> CO<sup>2</sup></Typography>
+      <Typography variant="h4" sx={{marginTop: '1rem'}}>Your yearly carbon emission would be</Typography>
+      <Typography variant="h2" sx={{marginTop: '1rem'}}><b style={{color: theme.palette.primary.main}}>{convertToYearly(result).toFixed(2)} kg </b></Typography>
+      <Typography variant="h5" sx={{marginTop: '2rem'}}>Similar With</Typography>
+      <Typography variant="h4">Taking <b style={{color: theme.palette.primary.main}}>{getPlaneKm()}km</b> of flights</Typography>
       <Typography variant="h5" sx={{marginTop: '2rem'}}>Carbon Footprint By Activity</Typography>
       <Bar style={{maxWidth: 500, marginTop: '1rem', marginBottom: '1rem'}} options={options} data={data} />
       <Button style={{marginTop: '2rem'}} variant="contained" onClick={lastStep}>Back</Button>
