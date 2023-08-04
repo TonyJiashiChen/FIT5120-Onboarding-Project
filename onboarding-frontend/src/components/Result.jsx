@@ -56,8 +56,8 @@ export function Result({
     return 12 / timeframe.value * value;
   }
 
-  const getPlaneKm = () => {
-    return (convertToYearly(result) / 0.115).toFixed(2);
+  const getPlaneRounds = () => {
+    return (convertToYearly(result) / 0.115 / 758).toFixed(2);
   }
 
 
@@ -66,7 +66,7 @@ export function Result({
       {
         isScreenLargerThanMd &&
           <img src="/nature.svg" alt="environmental drawing" style={{
-            height: 200,
+            height: 230,
             position: "absolute",
             right: 20,
             top: 40,
@@ -74,8 +74,8 @@ export function Result({
       }
       <Typography variant="h4" sx={{marginTop: '1rem'}}>Your yearly carbon emission would be</Typography>
       <Typography variant="h2" sx={{marginTop: '1rem'}}><b style={{color: theme.palette.primary.main}}>{convertToYearly(result).toFixed(2)} kg </b></Typography>
-      <Typography variant="h5" sx={{marginTop: '2rem'}}>Similar With</Typography>
-      <Typography variant="h4">Taking <b style={{color: theme.palette.primary.main}}>{getPlaneKm()}km</b> of flights</Typography>
+      <Typography variant="h5" sx={{marginTop: '2rem'}}>Similar With Carbon Emission</Typography>
+      <Typography variant="h4"><b style={{color: theme.palette.primary.main}}>{getPlaneRounds()}</b> flights from Sydney to Melbourne</Typography>
       <Typography variant="h5" sx={{marginTop: '3rem'}}>Carbon Footprint By Activity</Typography>
       <Bar style={{maxWidth: 500, marginTop: '1rem', marginBottom: '1rem'}} options={options} data={data} />
       <Button style={{marginTop: '2rem', marginRight: '1rem'}} variant="contained" onClick={cleanAndRedo}>Clean and Redo</Button>

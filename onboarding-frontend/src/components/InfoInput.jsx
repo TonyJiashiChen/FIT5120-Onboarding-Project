@@ -5,6 +5,24 @@ import { useEffect } from "react";
 import { useTheme } from '@emotion/react';
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+// const activities = [
+//   {
+//     name: 'Electricity',
+//     unit: 'kWh',
+//     icon: '⚡',
+//   },
+//   {
+//     name: 'Gas',
+//     unit: 'MJ',
+//     icon: '🔥'
+//   },
+//   {
+//     name: 'Private Transport',
+//     unit: 'km',
+//     icon: '🚗'
+//   }
+// ]
+
 export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, gas, car, result, setElectricity, setGas, setCar, setResult }) {
 
   const [electricityUsage, setElectricityUsage] = useState(0);
@@ -28,11 +46,11 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
     <>
       {
         isScreenLargerThanMd &&
-          <img src="/revenue_re.svg" alt="environmental drawing" style={{
-            height: 200,
+          <img src="/park.svg" alt="environmental drawing" style={{
+            height: 220,
             position: "absolute",
-            right: 20,
-            top: 40,
+            right: 30,
+            bottom: 0,
           }} />
       }
       <Typography variant="h4" sx={{marginTop: '1rem'}}>Your energy consumptions</Typography>

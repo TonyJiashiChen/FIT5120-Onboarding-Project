@@ -175,7 +175,7 @@ export function Welcome({
           </Box>
         )}
         renderInput={(params) => <TextField {...params} label="Enter your suburb" helperText="Compare your carbon consumption with your neighbors." />}
-        getOptionLabel={(option) => option.suburb}
+        getOptionLabel={(option) => `${option.suburb} (${option.postcode})`}
         disableClearable
       />
 
