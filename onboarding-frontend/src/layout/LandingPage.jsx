@@ -41,29 +41,45 @@ const LandingPage = (props) => {
                 style={{
                     display: 'flex',
                     maxHeight: '30vh',
-                    flexDirection: 'row',
-                    marginBottom: '5rem'
+                    flexDirection: 'row'
                 }}
             >
             <img src='/favicon-white.png' style={{height: '32px', marginRight: '1rem', marginTop: '0.5rem'}} alt='logo' />
             <Typography variant="h3" color='common.white'>
                 Carbon Visualizer
             </Typography>
+            
             </div>
-
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    margin: '3rem'
+                }}
+            >
+            <Typography variant="h6" color='common.white'>Understand your environmental impact and take action today!</Typography>
+            </div>
+            
             <Trail open={props.landingToggled}>
-                <Typography variant="h4" color='common.white'>Let's calculate</Typography>
-                <Typography variant="h4" color='common.white'>your carbon</Typography>
-                <Typography variant="h4" color='common.white'>footprint</Typography>
+                
+                <Typography variant="h4" color='common.white'>What's my</Typography>
+                <Typography variant="h4" color='common.white'>carbon footprint?</Typography>
             </Trail>
             
 
             <Button 
                 variant="contained" 
-                size="large"
+                sx={ { borderRadius: 30 } }
+                style={{
+                    maxWidth: '150px', 
+                    maxHeight: '150px', 
+                    minWidth: '150px', 
+                    minHeight: '150px',
+                    backgroundColor: theme.palette.primary.dark
+                }}
                 onClick={props.handleLandingToggle}
             >
-                Start
+                Calculate Now
             </Button>
 
         </a.div>)}

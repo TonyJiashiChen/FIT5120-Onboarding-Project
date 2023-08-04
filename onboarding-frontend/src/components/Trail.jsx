@@ -12,7 +12,11 @@ const Trail = ({ open, children }) => {
       })
 
     return (
-        <div>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column'
+        }}>
             {trail.map(({ height, ...style }, index) => (
                 <a.div key={index} style={style}>
                 <a.div style={{ height }}>{items[index]}</a.div>
