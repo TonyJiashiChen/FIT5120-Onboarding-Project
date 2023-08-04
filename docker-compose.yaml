@@ -28,6 +28,8 @@ services:
       - "3000:3000" # <local-host>:<container-port>
     depends_on:
       - backend
+    stdin_open: true
+    tty: true
 
 
 
