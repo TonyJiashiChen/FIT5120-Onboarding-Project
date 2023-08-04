@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
 import { Welcome } from "../components/Welcome";
 import { InfoInput } from "../components/InfoInput";
@@ -41,6 +41,20 @@ export function Main() {
   const [car, setCar] = useState(0);
   const [result, setResult] = useState(0);
 
+  const cleanAndRedo = useCallback(() => {
+    setActiveStep(0);
+    setPostcode('');
+    setSuburb('');
+    setTimeframe({
+      label: 'One Month',
+      value: 1
+    });
+    setElectricity(0);
+    setGas(0);
+    setCar(0);
+    setResult(0);
+  }, []);
+
   const nextStep = () => {
     setActiveStep(activeStep + 1);
   }
@@ -51,7 +65,7 @@ export function Main() {
     <>
       <Container maxWidth="lg">
         <StepIndicator steps={steps} activeStep={activeStep} />
-        <Paper elevation={3} sx={{ padding: '2rem' }}>
+        <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>
           { 
             React.cloneElement(
               steps[activeStep].component, {
@@ -72,7 +86,8 @@ export function Main() {
                 car,
                 setCar,
                 result,
-                setResult
+                setResult,
+                cleanAndRedo
               })
           }
         </Paper>

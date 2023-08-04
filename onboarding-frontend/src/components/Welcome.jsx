@@ -8,6 +8,10 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useTheme } from "@mui/material";
+import TodayIcon from '@mui/icons-material/Today';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 /*
 const get_options = async () => {
@@ -108,12 +112,15 @@ const options = [
 const timeframes = [{
   label: 'One Month',
   value: 1,
+  icon: <TodayIcon />
 },{
   label: 'Three Months',
   value: 3,
+  icon: <DateRangeIcon />
 }, {
   label: 'One Year',
   value: 12,
+  icon: <CalendarMonthIcon />
 }]
 
 export function Welcome({
@@ -126,6 +133,7 @@ export function Welcome({
   setPostcode
 }) {
   const theme = useTheme();
+  const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up('md'));
 
   React.useEffect(() => {
     setSuburb(options[0]);
@@ -133,6 +141,16 @@ export function Welcome({
   }, [setSuburb, setPostcode]);
   return (
     <>
+      {
+        isScreenLargerThanMd &&
+          <img src="/environment_iaus.svg" alt="environmental drawing" style={{
+            height: 200,
+            position: "absolute",
+            right: 0,
+            top: 60,
+            transform: 'scaleX(-1)',
+          }} />
+      }
       <Typography variant="h4" component="div" sx={{ flexGrow: 1, marginTop: '1rem' }}>
         Welcome to the Carbon Visualizer!
       </Typography>
@@ -174,8 +192,9 @@ export function Welcome({
           <Card variant={tf.value === timeframe.value?'elevation':'outlined'} sx={{ minWidth: 200, maxWidth: 300, marginTop: '1rem', border: tf.value===timeframe.value?`3px solid ${theme.palette.primary.main}`:`2px dashed ${theme.palette.primary.main}` }}>
             <CardActionArea onClick={() => {setTimeframe(tf)}}>
               <CardContent sx={{height: 120, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {tf.label}
+                {tf.icon}
+                <Typography gutterBottom variant="h5" component="div" sx={{marginBottom: 0, marginLeft: '5px'}}>
+                   {tf.label}
                 </Typography>
               </CardContent>
             </CardActionArea>

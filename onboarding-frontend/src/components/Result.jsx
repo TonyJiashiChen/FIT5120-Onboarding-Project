@@ -3,9 +3,10 @@ import { Chart as ChartJS, BarElement, Title, Tooltip, Legend, CategoryScale, Li
 import { useMemo } from 'react';
 import { Bar } from "react-chartjs-2";
 import { useTheme } from '@emotion/react';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 ChartJS.register(BarElement, Title, Tooltip, Legend, CategoryScale, LinearScale);
-
+ChartJS.defaults.font.size = 16;
 const options = {
   responsive: true,
   scales: {
@@ -30,9 +31,11 @@ export function Result({
   gas,
   car,
   result,
-  timeframe
+  timeframe,
+  cleanAndRedo
 }) {
   const theme = useTheme();
+  const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up('md'));
   const data = useMemo(() => ({
     labels,
     datasets: [
@@ -57,15 +60,26 @@ export function Result({
     return (convertToYearly(result) / 0.115).toFixed(2);
   }
 
+
   return (
     <>
+      {
+        isScreenLargerThanMd &&
+          <img src="/nature.svg" alt="environmental drawing" style={{
+            height: 200,
+            position: "absolute",
+            right: 20,
+            top: 40,
+          }} />
+      }
       <Typography variant="h4" sx={{marginTop: '1rem'}}>Your yearly carbon emission would be</Typography>
       <Typography variant="h2" sx={{marginTop: '1rem'}}><b style={{color: theme.palette.primary.main}}>{convertToYearly(result).toFixed(2)} kg </b></Typography>
       <Typography variant="h5" sx={{marginTop: '2rem'}}>Similar With</Typography>
       <Typography variant="h4">Taking <b style={{color: theme.palette.primary.main}}>{getPlaneKm()}km</b> of flights</Typography>
-      <Typography variant="h5" sx={{marginTop: '2rem'}}>Carbon Footprint By Activity</Typography>
+      <Typography variant="h5" sx={{marginTop: '3rem'}}>Carbon Footprint By Activity</Typography>
       <Bar style={{maxWidth: 500, marginTop: '1rem', marginBottom: '1rem'}} options={options} data={data} />
-      <Button style={{marginTop: '2rem'}} variant="contained" onClick={lastStep}>Back</Button>
+      <Button style={{marginTop: '2rem', marginRight: '1rem'}} variant="contained" onClick={cleanAndRedo}>Clean and Redo</Button>
+      <Button style={{marginTop: '2rem'}} variant="outlined" onClick={lastStep}>Back</Button>
     </>
   )
 }
