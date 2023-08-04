@@ -19,7 +19,7 @@ const get_options = async () => {
   const options = await response.json();
   console.log(options);
 }
-get_suburb();
+get_options();
 */
 
 const options = [
