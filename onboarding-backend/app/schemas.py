@@ -7,6 +7,12 @@ class Energy(BaseModel):
     year: int
     avg_emissions: float
 
+class EmissionOut(BaseModel):
+    postcode: int
+    year: int
+    electricity_emissions: float
+    gas_emissions: float
+
 class Location(BaseModel):
     postcode: int
     suburb: str
