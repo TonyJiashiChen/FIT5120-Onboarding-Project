@@ -43,7 +43,9 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
           label="Electricity"
           value={electricityUsage}
           onChange={(event) => {
-            setElectricityUsage(event.target.value);
+            if (event.target.value >= 0) {
+              setElectricityUsage(event.target.value);
+            }
           }}
           variant="outlined"
           margin="normal"
@@ -59,7 +61,9 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
           label="Gas"
           value={gasUsage}
           onChange={(event) => {
-            setGasUsage(event.target.value);
+            if (event.target.value >= 0) {
+              setGasUsage(event.target.value);
+            }
           }}
           variant="outlined"
           margin="normal"
@@ -75,7 +79,9 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
           label="Private Vehicle"
           value={carUsage}
           onChange={(event) => {
-            setCarUsage(event.target.value);
+            if (event.target.value >= 0) {
+              setCarUsage(event.target.value);
+            }
           }}
           variant="outlined"
           margin="normal"
