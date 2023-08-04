@@ -1,12 +1,58 @@
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { Chart as ChartJS, BarElement, Title, Tooltip, Legend, CategoryScale, LinearScale } from "chart.js";
+import { useMemo } from 'react';
+import { Bar } from "react-chartjs-2";
+import { useTheme } from '@emotion/react';
+
+ChartJS.register(BarElement, Title, Tooltip, Legend, CategoryScale, LinearScale);
+
+const options = {
+  responsive: true,
+  scales: {
+    x: {
+      stacked: true,
+    },
+    y: {
+      stacked: true
+    }
+  }
+};
+
+const labels = [
+  'Electricity',
+  'Gas',
+  'Privite Transport'
+]
 
 export function Result({
-  lastStep
+  lastStep,
+  electricity,
+  gas,
+  car,
+  result
 }) {
+  const theme = useTheme();
+  const data = useMemo(() => ({
+    labels,
+    datasets: [
+      {
+        label: 'Carbon footprint',
+        data: [electricity, gas, car],
+        backgroundColor: theme.palette.primary.main
+      },
+      {
+        label: 'Neighbor Average Footprint',
+        data: [0, 0, 0],
+        backgroundColor: theme.palette.secondary.main
+      }
+    ]
+  }), [car, electricity, gas]);
   return (
     <>
-      <h1>Result</h1>
-      <Button variant="contained" onClick={lastStep}>Back</Button>
+      <Typography variant="h4" sx={{marginTop: '1rem'}}>Your carbon footprint is <b style={{color: theme.palette.primary.main}}>{result.toFixed(2)} kg</b> CO<sup>2</sup></Typography>
+      <Typography variant="h5" sx={{marginTop: '2rem'}}>Carbon Footprint By Activity</Typography>
+      <Bar style={{maxWidth: 500, marginTop: '1rem', marginBottom: '1rem'}} options={options} data={data} />
+      <Button style={{marginTop: '2rem'}} variant="contained" onClick={lastStep}>Back</Button>
     </>
   )
 }

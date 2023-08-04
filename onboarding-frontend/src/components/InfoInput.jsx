@@ -1,59 +1,25 @@
 import { Button } from "@mui/material";
 import React, {useState} from "react";
 import { TextField, Typography, Grid, InputAdornment } from "@mui/material";
+import { useEffect } from "react";
 
 
-export function InfoInput({ activeStep, steps, nextStep, lastStep }) {
+export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, gas, car, result, setElectricity, setGas, setCar, setResult }) {
 
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [number3, setNumber3] = useState("");
-  const [result, setResult] = useState("calculating");
+  const [electricityUsage, setElectricityUsage] = useState(0);
+  const [gasUsage, setGasUsage] = useState(0);
+  const [carUsage, setCarUsage] = useState(0);
 
-  const [electricity, setElectricity] = useState(0);
-  const [gas, setGas] = useState(0);
-  const [car, setCar] = useState(0);
 
-  const handleNumber1Change = (event) => {
-    const value = event.target.value;
-    setNumber1(value);
+  useEffect(() => {
+    setElectricity(electricityUsage * 0.85);
+    setGas(gasUsage * 11.7 * 0.02);
+    setCar(carUsage * 0.146);
+  }, [carUsage, electricityUsage, gasUsage, setCar, setElectricity, setGas]);
 
-    updateResult(value, number2, number3);
-  };
-
-  const handleNumber2Change = (event) => {
-    const value = event.target.value;
-    setNumber2(value);
-
-    updateResult(number1, value, number3);
-  };
-
-  const handleNumber3Change = (event) => {
-    const value = event.target.value;
-    setNumber3(value);
-
-    updateResult(number1, number2, value);
-  };
-
-  const updateResult = (num1, num2, num3) => {
-    const parsedNum1 = parseInt(num1);
-    const parsedNum2 = parseInt(num2);
-    const parsedNum3 = parseInt(num3);
-
-    setElectricity(parsedNum1 * 0.85);
-    setGas(parsedNum2 * 11.7 * 0.02);
-    setCar(parsedNum3 * 146.5);
-
-    const electroCarbon = parsedNum1 * 0.85;
-    const gasCarbon = parsedNum2 * 11.7 * 0.02;
-    const carCarbon = parsedNum3 * 146.5;
-
-    if (isNaN(electroCarbon) || isNaN(gasCarbon) || isNaN(carCarbon)) {
-      setResult("calculating");
-    } else {
-      setResult(electroCarbon + gasCarbon + carCarbon);
-    }
-  };
+  useEffect(() => {
+    setResult(electricity + gas + car);
+  }, [car, electricity, gas, setResult]);
 
   return (
     <>
@@ -63,8 +29,10 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep }) {
         <TextField
           type="number"
           label="Electricity"
-          value={number1}
-          onChange={handleNumber1Change}
+          value={electricityUsage}
+          onChange={(event) => {
+            setElectricityUsage(event.target.value);
+          }}
           variant="outlined"
           margin="normal"
           InputProps={{
@@ -77,8 +45,10 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep }) {
         <TextField
           type="number"
           label="Gas"
-          value={number2}
-          onChange={handleNumber2Change}
+          value={gasUsage}
+          onChange={(event) => {
+            setGasUsage(event.target.value);
+          }}
           variant="outlined"
           margin="normal"
           InputProps={{
@@ -91,8 +61,10 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep }) {
         <TextField
           type="number"
           label="Private Vehicle"
-          value={number3}
-          onChange={handleNumber3Change}
+          value={carUsage}
+          onChange={(event) => {
+            setCarUsage(event.target.value);
+          }}
           variant="outlined"
           margin="normal"
           InputProps={{
@@ -101,14 +73,13 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep }) {
         />
       </Grid>
       <Grid item>
-        <Typography variant="h4" sx={{marginTop: '2rem'}}>Your Total Carbonfootprint:</Typography>
-        <Typography variant="h6">{result}</Typography>
+        <Typography variant="h4" sx={{marginTop: '2rem'}}>Your Total Carbonfootprint: {result.toFixed(2)} kg</Typography>
         <Typography variant="h6">
-          Your Electricity Carbonfootprint: {electricity}
+          Your Electricity Carbonfootprint: {electricity.toFixed(2)} kg
         </Typography>
-        <Typography variant="h6">Your Gas Carbonfootprint: {gas}</Typography>
+        <Typography variant="h6">Your Gas Carbonfootprint: {gas.toFixed(2)} kg</Typography>
         <Typography variant="h6">
-          Your Vehicle Carbonfootprint: {car}
+          Your Vehicle Carbonfootprint: {car.toFixed(2)} kg
         </Typography>
       </Grid>
       <Grid item>

@@ -30,6 +30,14 @@ export function Main() {
   const [suburb, setSuburb] = useState('');
   // timeframe in months
   const [timeframe, setTimeframe] = useState('');
+  // electronic carbon emission
+  const [electricity, setElectricity] = useState(0);
+  // gas carbon emission
+  const [gas, setGas] = useState(0);
+  // car carbon emission
+  const [car, setCar] = useState(0);
+  const [result, setResult] = useState(0);
+
   const nextStep = () => {
     setActiveStep(activeStep + 1);
   }
@@ -53,7 +61,15 @@ export function Main() {
                 postcode,
                 setPostcode,
                 timeframe,
-                setTimeframe
+                setTimeframe,
+                electricity,
+                setElectricity,
+                gas,
+                setGas,
+                car,
+                setCar,
+                result,
+                setResult
               })
           }
         </Paper>
