@@ -36,8 +36,8 @@ def get_energy(postcode: int, year: int, db: Session = Depends(get_db)):
     data = schemas.EmissionOut(
         postcode=postcode,
         year=year,
-        electricity_emissions=electricity_data.__dict__['total_emissions'],
-        gas_emissions=gas_data.__dict__['total_emissions']
+        electricity_emissions_kg_year=electricity_data.__dict__['avg_emissions'],
+        gas_emissions_kg_year=gas_data.__dict__['avg_emissions']
     )
 
     return data

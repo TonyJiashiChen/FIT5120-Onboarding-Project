@@ -10,8 +10,8 @@ class Energy(BaseModel):
 class EmissionOut(BaseModel):
     postcode: int
     year: int
-    electricity_emissions: float
-    gas_emissions: float
+    electricity_emissions_kg_year: float
+    gas_emissions_kg_year: float
 
 class Location(BaseModel):
     postcode: int
