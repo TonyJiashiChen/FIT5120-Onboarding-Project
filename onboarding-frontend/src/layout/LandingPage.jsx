@@ -24,6 +24,7 @@ const LandingPage = (props) => {
             ...styles,
             position: "fixed",
             maxHeight: "100vh",
+            padding: '10px',
             top: 0,
             bottom: 0,
             right: 0,
@@ -41,7 +42,8 @@ const LandingPage = (props) => {
                 style={{
                     display: 'flex',
                     maxHeight: '30vh',
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    marginBottom: '2rem'
                 }}
             >
             <img src='/favicon-white.png' style={{height: '32px', marginRight: '1rem', marginTop: '0.5rem'}} alt='logo' />
@@ -50,18 +52,10 @@ const LandingPage = (props) => {
             </Typography>
             
             </div>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    margin: '3rem'
-                }}
-            >
-            <Typography variant="h6" color='common.white'>Understand your environmental impact and take action today!</Typography>
-            </div>
             
             <Trail open={props.landingToggled}>
-                
+                <Typography variant="h6" color='common.white'>Understand your environmental impact and take action today!</Typography>
+
                 <Typography variant="h4" color='common.white'>What's my</Typography>
                 <Typography variant="h4" color='common.white'>carbon footprint?</Typography>
             </Trail>
@@ -69,19 +63,19 @@ const LandingPage = (props) => {
 
             <Button 
                 variant="contained" 
-                sx={ { borderRadius: 30 } }
                 style={{
-                    maxWidth: '150px', 
-                    maxHeight: '150px', 
-                    minWidth: '150px', 
-                    minHeight: '150px',
+                    maxWidth: '200px', 
+                    maxHeight: '100px', 
+                    minWidth: '200px', 
+                    minHeight: '100px',
                     backgroundColor: theme.palette.primary.dark
                 }}
                 onClick={props.handleLandingToggle}
             >
-                Calculate Now
+                
+                <Typography variant="h6" color='common.white'>Calculate Now</Typography>
             </Button>
-
+            <img src="/environmental_study.svg" style={{ marginTop: 'auto', height: '300px' }} alt="environmental study" />
         </a.div>)}
         </div>
     )
