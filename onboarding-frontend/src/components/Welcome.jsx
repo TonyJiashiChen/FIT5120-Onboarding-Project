@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -13,101 +13,8 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-/*
-const get_options = async () => {
-  const response = await fetch('http://localhost:8000/api/location');
-  const options = await response.json();
-  console.log(options);
-}
-get_options();
-*/
+const apiUrl = process.env.REACT_APP_API_URL;
 
-const options = [
-  {
-    "postcode": 3802,
-    "suburb": "Endeavour Hills",
-    "latitude": -37.97020387932868,
-    "longitude": 145.2562723381787
-  },
-  {
-    "postcode": 3807,
-    "suburb": "Beaconsfield",
-    "latitude": -38.055213443730615,
-    "longitude": 145.3660402905909
-  },
-  {
-    "postcode": 3978,
-    "suburb": "Clyde and Clyde North",
-    "latitude": -38.128774486217914,
-    "longitude": 145.35587854314844
-  },
-  {
-    "postcode": 3803,
-    "suburb": "Hallam",
-    "latitude": -38.007567081050084,
-    "longitude": 145.26891675520798
-  },
-  {
-    "postcode": 3806,
-    "suburb": "Berwick and Harkaway",
-    "latitude": -38.02737301912716,
-    "longitude": 145.35162892874706
-  },
-  {
-    "postcode": 3976,
-    "suburb": "Hampton Park",
-    "latitude": -38.0386345283274,
-    "longitude": 145.26866310174384
-  },
-  {
-    "postcode": 3156,
-    "suburb": "Lysterfield South",
-    "latitude": -37.952494433947635,
-    "longitude": 145.26696070561252
-  },
-  {
-    "postcode": 3804,
-    "suburb": "Narre Warren North",
-    "latitude": -37.98192494004503,
-    "longitude": 145.3132574801433
-  },
-  {
-    "postcode": 3975,
-    "suburb": "Lynbrook and Lyndhurst",
-    "latitude": -38.06185951316981,
-    "longitude": 145.25302722972947
-  },
-  {
-    "postcode": 3980,
-    "suburb": "Blind Bight , Tooradin and Warneet",
-    "latitude": -38.205491632708714,
-    "longitude": 145.36995224637462
-  },
-  {
-    "postcode": 3805,
-    "suburb": "Narre Warren and Narre Warren South",
-    "latitude": -38.03656411385693,
-    "longitude": 145.30428192002296
-  },
-  {
-    "postcode": 3912,
-    "suburb": "Pearcedale",
-    "latitude": -38.19712264995437,
-    "longitude": 145.25075485842544
-  },
-  {
-    "postcode": 3177,
-    "suburb": "Doveton and Eumemmerring",
-    "latitude": -37.9905805847808,
-    "longitude": 145.2402222123229
-  },
-  {
-    "postcode": 3977,
-    "suburb": "Botanic Ridge, Cannons Creek, Cranbourne, Cranbourne East, Cranbourne North, Cranbourne South, Cranbourne West, Devon Meadows and Junction Village",
-    "latitude": -38.13735705358775,
-    "longitude": 145.2836422978307
-  }
-]
 
 const timeframes = [{
   label: 'One Month',
@@ -135,10 +42,25 @@ export function Welcome({
   const theme = useTheme();
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up('md'));
 
-  React.useEffect(() => {
-    setSuburb(options[0]);
-    setPostcode(options[0].postcode);
-  }, [setSuburb, setPostcode]);
+  const [options, setOptions] = useState([]);
+
+  const get_options = async () => {
+    const response = await fetch(`${apiUrl}location`);
+    return await response.json();
+    
+  }
+
+  useEffect(() => {
+    get_options().then(data => {
+      setOptions(data);
+      console.log(options)
+      if (data && data.length > 0) {
+        setSuburb(data[0]);
+        setPostcode(data[0].postcode);
+    }
+    });
+  }, [])
+
   return (
     <>
       {
@@ -175,7 +97,7 @@ export function Welcome({
           </Box>
         )}
         renderInput={(params) => <TextField {...params} label="Enter your suburb" helperText="Compare your carbon consumption with your neighbors." />}
-        getOptionLabel={(option) => `${option.suburb} (${option.postcode})`}
+        getOptionLabel={(option) => option.suburb}
         disableClearable
       />
 
