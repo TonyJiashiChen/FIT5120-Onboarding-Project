@@ -23,7 +23,7 @@ const LandingPage = (props) => {
         {fullscreenPage((styles, item) => item && <a.div style={{
             ...styles,
             position: "fixed",
-            maxHeight: "100vh",
+            maxHeight: "100dvh",
             padding: '10px',
             top: 0,
             bottom: 0,
