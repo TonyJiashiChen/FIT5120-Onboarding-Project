@@ -57,11 +57,11 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
       <Grid sx={{ marginTop: '1rem'}} item>
         <Typography variant="h5" sx={{marginTop: '2rem'}}>Electricity Usage</Typography>
         <TextField
-          type="number"
+          type="text"
           label="Electricity"
           value={electricityUsage}
           onChange={(event) => {
-            if (event.target.value >= 0) {
+            if (Number.parseInt(event.target.value) >= 0 || event.target.value === '') {
               setElectricityUsage(event.target.value);
             }
           }}
@@ -75,11 +75,11 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
       <Grid item>
         <Typography variant="h5" sx={{marginTop: '2rem'}}>Gas Usage</Typography>
         <TextField
-          type="number"
+          type="text"
           label="Gas"
           value={gasUsage}
           onChange={(event) => {
-            if (event.target.value >= 0) {
+            if (Number.parseInt(event.target.value) >= 0 || event.target.value === '') {
               setGasUsage(event.target.value);
             }
           }}
@@ -93,11 +93,11 @@ export function InfoInput({ activeStep, steps, nextStep, lastStep, electricity, 
       <Grid item>
         <Typography variant="h5" sx={{marginTop: '2rem'}}>Private Vehicle Usage</Typography>
         <TextField
-          type="number"
+          type="text"
           label="Private Vehicle"
           value={carUsage}
           onChange={(event) => {
-            if (event.target.value >= 0) {
+            if (Number.parseInt(event.target.value) >= 0 || event.target.value === '') {
               setCarUsage(event.target.value);
             }
           }}
