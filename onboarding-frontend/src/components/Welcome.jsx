@@ -51,18 +51,28 @@ export function Welcome({
     const response = await fetch(`http://104.168.117.112:8000/api/location/`)
     //const response = await fetch(`${apiUrl}location`);
     return await response.json();
-  };
+  }
 
   useEffect(() => {
-    get_options().then((data) => {
-      setOptions(data);
-      console.log(options);
-      if (data && data.length > 0) {
-        setSuburb(data[0]);
-        setPostcode(data[0].postcode);
-      }
-    });
-  }, []);
+    if (apiUrl !== undefined) {
+      get_options().then(data => {
+        console.log(data);
+        if (data && data.length > 0) {
+          setSuburb(data[0]);
+          setPostcode(data[0].postcode);
+        }
+      });
+    } else {
+      setOptions([
+        {
+          "postcode": 3802,
+          "suburb": "Endeavour Hills",
+          "latitude": -37.97020387932868,
+          "longitude": 145.2562723381787
+        }
+      ]);
+    }
+  }, [setPostcode, setSuburb, setOptions]);
 
   return (
     <>
