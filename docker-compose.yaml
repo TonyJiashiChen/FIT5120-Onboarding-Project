@@ -27,7 +27,7 @@ services:
     ports:
       - "3000:3000" # <local-host>:<container-port>
     environment:
-      - REACT_APP_API_URL=http://backend:8000/api/
+      - REACT_APP_API_URL=http://34.129.30.6:8000/api/
     depends_on:
       - backend
     stdin_open: true
