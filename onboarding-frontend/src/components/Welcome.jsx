@@ -48,7 +48,8 @@ export function Welcome({
   const [options, setOptions] = useState([]);
 
   const get_options = async () => {
-    const response = await fetch(`${apiUrl}location`);
+    const response = await fetch(`http://104.168.117.112:8000/api/location/`)
+    //const response = await fetch(`${apiUrl}location`);
     return await response.json();
   };
 

@@ -75,7 +75,7 @@ export function Result({
           (averageElectricity + averageGas)) *
         100;
       console.log(percentage);
-      return `Congrats, you are %${percentage.toFixed(2)} less than average`;
+      return `Congrats, you are ${percentage.toFixed(2)}% less than average`;
     } else if (averageElectricity + averageGas < result) {
       console.log("smaller");
       percentage =
@@ -83,7 +83,7 @@ export function Result({
           (averageElectricity + averageGas)) *
         100;
       console.log(percentage);
-      return `You are %${percentage.toFixed(2)} more than average`;
+      return `You are ${percentage.toFixed(2)}% more than average`;
     }
   };
 
