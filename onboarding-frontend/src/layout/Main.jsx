@@ -51,6 +51,8 @@ export function Main() {
   const [averageGas, setAverageGas] = useState(0);
   const [averageEnergy, setAverageEnergy] = useState(0);
   const [averageResult, setAverageResult] = useState("");
+  // activity usages
+  const [activityUsages, setActivityUsages] = useState([]);
 
   const cleanAndRedo = useCallback(() => {
     setActiveStep(0);
@@ -113,6 +115,8 @@ export function Main() {
             averageResult,
             setAverageResult,
             cleanAndRedo,
+            activityUsages,
+            setActivityUsages,
           })}
         </Paper>
       </Container>

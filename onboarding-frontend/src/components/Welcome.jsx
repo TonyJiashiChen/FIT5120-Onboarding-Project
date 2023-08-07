@@ -141,7 +141,7 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "2rem" }}
       >
-        Select a time period to visualize
+        Select a billing period
       </Typography>
       <Typography
         variant="subtitle1"
