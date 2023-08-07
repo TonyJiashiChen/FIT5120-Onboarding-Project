@@ -20,7 +20,13 @@ export function InfoInput({
                               setElectricity,
                               setGas,
                               setCar,
-                              setResult
+                              setResult,
+                              averageElectricity,
+                              setAverageElectricity,
+                              averageGas,
+                              setAverageGas,
+                              suburb,
+                              
                           }) {
 
     const [electricityUsage, setElectricityUsage] = useState(0);
@@ -43,6 +49,42 @@ export function InfoInput({
             setterFunc(value);
         }
     };
+
+
+    const getElectricity = async () => {
+        const response = await fetch(
+          `http://104.168.117.112:8000/api/energy/${suburb.postcode}?year=2022&energy_type=Electricity`
+        );
+        const res = await response.json();
+    
+        return res;
+      };
+      const getGas = async () => {
+        const response = await fetch(
+          `http://104.168.117.112:8000/api/energy/${suburb.postcode}?year=2022&energy_type=Gas`
+        );
+        const res = await response.json();
+        return res;
+      };
+    
+      useEffect(() => {
+        getElectricity().then((data) => {
+          setAverageElectricity(data.avg_emissions);
+          if (data && data.length > 0) {
+            setAverageElectricity(data[0].avg_emissions);
+          }
+        });
+      }, []);
+    
+      useEffect(() => {
+        getGas().then((data) => {
+          setAverageGas(data.avg_emissions);
+          if (data && data.length > 0) {
+            setAverageGas(data[0].avg_emissions);
+          }
+        });
+      }, []);
+
 
     useEffect(() => {
         setElectricity(electricityUsage * 0.85);

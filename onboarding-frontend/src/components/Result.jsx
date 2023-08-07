@@ -8,7 +8,7 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { useTheme } from "@emotion/react";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -45,8 +45,48 @@ export function Result({
   timeframe,
   cleanAndRedo,
   suburb,
+  averageElectricity,
+  setAverageElectricity,
+  averageGas,
+  setAverageGas,
+  averageEnergy,
+  setAverageEnergy,
+  averageResult,
+  setAverageResult,
 }) {
   const theme = useTheme();
+
+  useEffect(() => {
+    setAverageEnergy(averageGas + averageElectricity);
+  }, [averageElectricity, averageGas, setAverageEnergy]);
+
+  const getComparison = () => {
+    var percentage = 0;
+    console.log(averageElectricity + averageGas);
+    console.log(result);
+    console.log(averageElectricity + averageGas > result);
+    if (result === 0) {
+      return `Congrats, you don't produce any carbon footprint!`;
+    }
+    if (averageElectricity + averageGas > result) {
+      console.log("bigger");
+      percentage =
+        ((averageElectricity + averageGas - result) /
+          (averageElectricity + averageGas)) *
+        100;
+      console.log(percentage);
+      return `Congrats, you are %${percentage.toFixed(2)} less than average`;
+    } else if (averageElectricity + averageGas < result) {
+      console.log("smaller");
+      percentage =
+        ((result - (averageElectricity + averageGas)) /
+          (averageElectricity + averageGas)) *
+        100;
+      console.log(percentage);
+      return `You are %${percentage.toFixed(2)} more than average`;
+    }
+  };
+
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const data = useMemo(
     () => ({
@@ -109,6 +149,9 @@ export function Result({
       <Typography variant="h4">
         <b style={{ color: theme.palette.primary.main }}>{getPlaneRounds()}</b>{" "}
         flights from Sydney to Melbourne
+      </Typography>
+      <Typography variant="h4">
+        <b style={{ color: theme.palette.secondary.main }}>{getComparison()}</b>
       </Typography>
       <Typography variant="h5" sx={{ marginTop: "3rem" }}>
         Carbon Footprint By Activity

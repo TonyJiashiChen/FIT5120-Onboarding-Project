@@ -10,27 +10,29 @@ import { Result } from "../components/Result";
 // steps for carbon footprint calculator
 const steps = [
   {
-    title: 'Welcome',
-    component: <Welcome />
-  }, {
-    title: 'Info',
-    component: <InfoInput />
-  }, {
-    title: 'Result',
-    component: <Result />
-  }
-]
+    title: "Welcome",
+    component: <Welcome />,
+  },
+  {
+    title: "Info",
+    component: <InfoInput />,
+  },
+  {
+    title: "Result",
+    component: <Result />,
+  },
+];
 
 export function Main() {
   // current active step
   const [activeStep, setActiveStep] = useState(0);
   // postcode info
-  const [postcode, setPostcode] = useState('');
+  const [postcode, setPostcode] = useState("");
   // surburb info, default to first option, structure in Welcome.jsx and according to API doc
-  const [suburb, setSuburb] = useState('');
+  const [suburb, setSuburb] = useState("");
   // timeframe in months
   const [timeframe, setTimeframe] = useState({
-    label: 'One Month',
+    label: "One Month",
     value: 1,
   });
   // electronic carbon emission
@@ -40,58 +42,71 @@ export function Main() {
   // car carbon emission
   const [car, setCar] = useState(0);
   const [result, setResult] = useState(0);
+  const [averageElectricity, setAverageElectricity] = useState(0);
+  const [averageGas, setAverageGas] = useState(0);
+  const [averageEnergy, setAverageEnergy] = useState(0);
+  const [averageResult, setAverageResult] = useState('');
 
   const cleanAndRedo = useCallback(() => {
     setActiveStep(0);
-    setPostcode('');
-    setSuburb('');
+    setPostcode("");
+    setSuburb("");
     setTimeframe({
-      label: 'One Month',
-      value: 1
+      label: "One Month",
+      value: 1,
     });
     setElectricity(0);
     setGas(0);
     setCar(0);
     setResult(0);
+    setAverageElectricity(0);
+    setAverageGas(0);
+    setAverageEnergy(0);
+    setAverageResult('');
   }, []);
 
   const nextStep = () => {
     setActiveStep(activeStep + 1);
-  }
+  };
   const lastStep = () => {
     setActiveStep(activeStep - 1);
-  }
+  };
   return (
     <>
       <Container maxWidth="lg">
         <StepIndicator steps={steps} activeStep={activeStep} />
-        <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>
-          { 
-            React.cloneElement(
-              steps[activeStep].component, {
-                activeStep,
-                steps,
-                nextStep,
-                lastStep,
-                suburb,
-                setSuburb,
-                postcode,
-                setPostcode,
-                timeframe,
-                setTimeframe,
-                electricity,
-                setElectricity,
-                gas,
-                setGas,
-                car,
-                setCar,
-                result,
-                setResult,
-                cleanAndRedo
-              })
-          }
+        <Paper elevation={3} sx={{ padding: "2rem", position: "relative" }}>
+          {React.cloneElement(steps[activeStep].component, {
+            activeStep,
+            steps,
+            nextStep,
+            lastStep,
+            suburb,
+            setSuburb,
+            postcode,
+            setPostcode,
+            timeframe,
+            setTimeframe,
+            electricity,
+            setElectricity,
+            gas,
+            setGas,
+            car,
+            setCar,
+            result,
+            setResult,
+            averageElectricity,
+            setAverageElectricity,
+            averageGas,
+            setAverageGas,
+            averageEnergy,
+            setAverageEnergy,
+            averageResult,
+            setAverageResult,
+            cleanAndRedo,
+          })}
         </Paper>
       </Container>
     </>
-  )
+  );
 }
