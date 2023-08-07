@@ -48,31 +48,35 @@ export function Welcome({
   const [options, setOptions] = useState([]);
 
   const get_options = async () => {
-    const response = await fetch(`http://104.168.117.112:8000/api/location/`)
+    const response = await fetch(`http://104.168.117.112:8000/api/location/`);
     //const response = await fetch(`${apiUrl}location`);
     return await response.json();
-  }
+  };
 
   useEffect(() => {
     if (apiUrl !== undefined) {
-      get_options().then(data => {
-        console.log(data);
+      get_options().then((data) => {
         if (data && data.length > 0) {
           setSuburb(data[0]);
           setPostcode(data[0].postcode);
         }
       });
     } else {
+      // Mock data for development
       setOptions([
         {
-          "postcode": 3802,
-          "suburb": "Endeavour Hills",
-          "latitude": -37.97020387932868,
-          "longitude": 145.2562723381787
-        }
+          postcode: 3802,
+          suburb: "Endeavour Hills",
+          latitude: -37.97020387932868,
+          longitude: 145.2562723381787,
+        },
       ]);
     }
   }, [setPostcode, setSuburb, setOptions]);
+
+  useEffect(() => {
+    setSuburb(options[0]);
+  }, [options, setSuburb]);
 
   return (
     <>
@@ -128,7 +132,7 @@ export function Welcome({
             helperText="Compare your carbon consumption with your neighbors."
           />
         )}
-        getOptionLabel={(option) => option.suburb}
+        getOptionLabel={(option) => option.suburb || ""}
         disableClearable
       />
 
@@ -158,6 +162,7 @@ export function Welcome({
       >
         {timeframes.map((tf) => (
           <Card
+            key={tf.value}
             variant={tf.value === timeframe.value ? "elevation" : "outlined"}
             sx={{
               minWidth: 200,

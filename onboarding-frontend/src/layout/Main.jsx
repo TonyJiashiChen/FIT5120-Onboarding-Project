@@ -1,11 +1,12 @@
 import React, { useCallback } from "react";
 import { useState } from "react";
 import { Welcome } from "../components/Welcome";
-import { InfoInput } from "../components/InfoInput";
+import { OverallUsage } from "../components/OverallUsage";
 import { StepIndicator } from "../components/StepIndicator";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { Result } from "../components/Result";
+import { ActivityUsage } from "../components/ActivityUsage";
 
 // steps for carbon footprint calculator
 const steps = [
@@ -14,8 +15,12 @@ const steps = [
     component: <Welcome />,
   },
   {
-    title: "Info",
-    component: <InfoInput />,
+    title: "Overall Usage",
+    component: <OverallUsage />,
+  },
+  {
+    title: "Activity Usage",
+    component: <ActivityUsage />,
   },
   {
     title: "Result",
@@ -45,7 +50,7 @@ export function Main() {
   const [averageElectricity, setAverageElectricity] = useState(0);
   const [averageGas, setAverageGas] = useState(0);
   const [averageEnergy, setAverageEnergy] = useState(0);
-  const [averageResult, setAverageResult] = useState('');
+  const [averageResult, setAverageResult] = useState("");
 
   const cleanAndRedo = useCallback(() => {
     setActiveStep(0);
@@ -62,7 +67,7 @@ export function Main() {
     setAverageElectricity(0);
     setAverageGas(0);
     setAverageEnergy(0);
-    setAverageResult('');
+    setAverageResult("");
   }, []);
 
   const nextStep = () => {
@@ -74,7 +79,11 @@ export function Main() {
   return (
     <>
       <Container maxWidth="lg">
-        <StepIndicator steps={steps} activeStep={activeStep} />
+        <StepIndicator
+          steps={steps}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
         <Paper elevation={3} sx={{ padding: "2rem", position: "relative" }}>
           {React.cloneElement(steps[activeStep].component, {
             activeStep,
