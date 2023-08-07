@@ -94,7 +94,7 @@ const LandingPage = () => {
                     placeholder="Enter password"
                     variant="filled"
                     sx={{
-                        input: { color : 'common.white'}
+                        input: { color : 'common.white', textAlign: 'center'}
                     }}
 
               />
