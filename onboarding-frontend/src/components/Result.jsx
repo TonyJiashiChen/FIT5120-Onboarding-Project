@@ -8,7 +8,7 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { Bar } from "react-chartjs-2";
 import { useTheme } from "@emotion/react";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -31,10 +31,10 @@ const options = {
     y: {
       stacked: true,
     },
-  },
+  }
 };
 
-const labels = ["Electricity", "Gas", "Privite Transport"];
+const byBillLabels = ["Electricity", "Gas", "Privite Transport"];
 
 export function Result({
   lastStep,
@@ -53,6 +53,7 @@ export function Result({
   setAverageEnergy,
   averageResult,
   setAverageResult,
+  activityUsages,
 }) {
   const theme = useTheme();
 
@@ -60,37 +61,41 @@ export function Result({
     setAverageEnergy(averageGas + averageElectricity);
   }, [averageElectricity, averageGas, setAverageEnergy]);
 
-  const getComparison = () => {
+  const totalCarbonByActivity = useMemo(() => {
+    return activityUsages.reduce((acc, curr) => acc + curr.carbon, 0);
+  }, [activityUsages]);
+
+  const largestCarbon = useMemo(() => {
+    return Math.max(
+      result,
+      totalCarbonByActivity * 52,
+    ).toFixed(2);
+  }, [result, totalCarbonByActivity]);
+
+  const getComparison = useCallback(() => {
     var percentage = 0;
-    console.log(averageElectricity + averageGas);
-    console.log(result);
-    console.log(averageElectricity + averageGas > result);
-    if (result === 0) {
+    if (largestCarbon === 0) {
       return `Congrats, you don't produce any carbon footprint!`;
     }
-    if (averageElectricity + averageGas > result) {
-      console.log("bigger");
+    if (averageElectricity + averageGas > largestCarbon) {
       percentage =
-        ((averageElectricity + averageGas - result) /
+        ((averageElectricity + averageGas - largestCarbon) /
           (averageElectricity + averageGas)) *
         100;
-      console.log(percentage);
       return `Congrats, you are ${percentage.toFixed(2)}% less than average`;
-    } else if (averageElectricity + averageGas < result) {
-      console.log("smaller");
+    } else if (averageElectricity + averageGas < largestCarbon) {
       percentage =
-        ((result - (averageElectricity + averageGas)) /
+        ((largestCarbon - (averageElectricity + averageGas)) /
           (averageElectricity + averageGas)) *
         100;
-      console.log(percentage);
       return `You are ${percentage.toFixed(2)}% more than average`;
     }
-  };
+  }, [averageElectricity, averageGas, largestCarbon]);
 
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
-  const data = useMemo(
+  const byBillData = useMemo(
     () => ({
-      labels,
+      labels: byBillLabels,
       datasets: [
         {
           label: "Carbon footprint",
@@ -121,6 +126,22 @@ export function Result({
     return (convertToYearly(result) / 0.115 / 758).toFixed(2);
   };
 
+  const byActivityData = useMemo(() => {
+    const topThreeActivitiesByCarbon = activityUsages.sort(
+      (a, b) => b.carbon - a.carbon
+    ).slice(0, 3);
+    return {
+      labels: topThreeActivitiesByCarbon.map((activity) => activity.name),
+      datasets: [
+        {
+          label: "Carbon footprint",
+          data: topThreeActivitiesByCarbon.map((activity) => activity.carbon),
+          backgroundColor: theme.palette.primary.main,
+        },
+      ],
+    };
+  }, [activityUsages, theme.palette.primary.main]);
+
   return (
     <>
       {isScreenLargerThanMd && (
@@ -140,17 +161,17 @@ export function Result({
       </Typography>
       <Typography variant="h2" sx={{ marginTop: "1rem" }}>
         <b style={{ color: theme.palette.primary.main }}>
-          {convertToYearly(result).toFixed(2)} kg{" "}
+          { largestCarbon } kg{" "}
         </b>
       </Typography>
       <Typography variant="h5" sx={{ marginTop: "2rem" }}>
         Similar With Carbon Emission
       </Typography>
-      <Typography variant="h4">
+      <Typography variant="h4" marginTop={1}>
         <b style={{ color: theme.palette.primary.main }}>{getPlaneRounds()}</b>{" "}
         flights from Sydney to Melbourne
       </Typography>
-      <Typography variant="h4">
+      <Typography variant="h5" marginTop={3}>
         <b style={{ color: theme.palette.secondary.main }}>{getComparison()}</b>
       </Typography>
       <Typography variant="h5" sx={{ marginTop: "3rem" }}>
@@ -159,7 +180,15 @@ export function Result({
       <Bar
         style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
         options={options}
-        data={data}
+        data={byActivityData}
+      />
+      <Typography variant="h5" sx={{ marginTop: "3rem" }}>
+        Carbon Footprint By Bill Type
+      </Typography>
+      <Bar
+        style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
+        options={options}
+        data={byBillData}
       />
       <Button
         style={{ marginTop: "2rem", marginRight: "1rem" }}
