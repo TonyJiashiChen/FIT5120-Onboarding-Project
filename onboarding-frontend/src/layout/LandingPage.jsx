@@ -1,39 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useTransition, a } from "react-spring";
 import { useTheme } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import Trail from "../components/Trail";
+import { AuthApi } from '../App';
 
-const LandingPage = (props) => {
+const LandingPage = () => {
   const theme = useTheme();
 
-  useEffect(() => {
-    if (props.landingToggled) {
-      document.body.style.overflow = "hidden";
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false)
+
+  const { setAuth } = useContext(AuthApi);
+
+  const navigate = useNavigate();
+
+  const handlePasswordCheck = () => {
+    const CORRECT_PASSWORD = 'carbonvisualizer';
+    if (password === CORRECT_PASSWORD) {
+        setError(false);
+        setAuth(true);
+        navigate('/home');
+    } else {
+      setError(true);
+      setAuth(false);
+      setPassword('');
     }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [props.landingToggled]);
-
-  const fullscreenPage = useTransition(props.landingToggled, {
-    from: { opacity: 1, transform: "scale(1)" },
-    enter: { opacity: 1, transform: "scale(1)" },
-    leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
-    config: { duration: 750 },
-  });
+  };
 
   return (
     <div>
-      {fullscreenPage(
-        (styles, item) =>
-          item && (
-            <a.div
+        <div
               style={{
-                ...styles,
                 position: "fixed",
                 height: "100%",
                 padding: "10px",
@@ -71,7 +73,7 @@ const LandingPage = (props) => {
                 </Typography>
               </div>
 
-              <Trail open={props.landingToggled}>
+              <Trail open={true}>
                 <Typography variant="h6" color="common.white">
                   Understand your environmental impact and take action today!
                 </Typography>
@@ -84,16 +86,29 @@ const LandingPage = (props) => {
                 </Typography>
               </Trail>
 
+              <TextField 
+                    error={error}
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Enter password"
+                    variant="filled"
+                    sx={{
+                        input: { color : 'common.white'}
+                    }}
+
+              />
               <Button
                 variant="contained"
                 style={{
+                  marginTop: "2rem",
                   maxWidth: "200px",
                   maxHeight: "100px",
                   minWidth: "200px",
                   minHeight: "100px",
                   backgroundColor: theme.palette.primary.dark,
                 }}
-                onClick={props.handleLandingToggle}
+                onClick={handlePasswordCheck}
               >
                 <Typography variant="h6" color="common.white">
                   Calculate Now
@@ -104,9 +119,7 @@ const LandingPage = (props) => {
                 style={{ marginTop: "auto", height: "30%" }}
                 alt="environmental study"
               />
-            </a.div>
-          )
-      )}
+            </div>
     </div>
   );
 };
