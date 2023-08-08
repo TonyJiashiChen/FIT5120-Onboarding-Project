@@ -4,10 +4,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { TextField, Typography, Grid, InputAdornment } from "@mui/material";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useTheme } from "@mui/material";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export function OverallUsage({
   activeStep,
@@ -22,15 +20,11 @@ export function OverallUsage({
   setGas,
   setCar,
   setResult,
-  averageElectricity,
-  setAverageElectricity,
-  averageGas,
-  setAverageGas,
   suburb,
 }) {
   const [electricityUsage, setElectricityUsage] = useState(0);
   const [gasUsage, setGasUsage] = useState(0);
-  const [carUsage, setCarUsage] = useState(0);
+  const [carUsage] = useState(0);
 
   const theme = useTheme();
 
@@ -45,32 +39,11 @@ export function OverallUsage({
   useEffect(() => {
     setElectricity(electricityUsage * 0.85);
     setGas(gasUsage * 11.7 * 0.02);
-    setCar(carUsage * 0.146);
   }, [carUsage, electricityUsage, gasUsage, setCar, setElectricity, setGas]);
 
   useEffect(() => {
     setResult(electricity + gas + car);
   }, [car, electricity, gas, setResult]);
-
-  const getElecAndGas = useCallback(async () => {
-    const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
-    
-    const res = await response.json();
-    return res;
-  }, [suburb.postcode]);
-
-  useEffect(() => {
-    getElecAndGas().then((data) => {
-
-      setAverageElectricity(data.electricity_emissions_kg_year);
-      setAverageGas(data.gas_emissions_kg_year);
-
-      if (data && data.length > 0) {
-        setAverageElectricity(data[0].electricity_emissions_kg_year);
-        setAverageGas(data[0].gas_emissions_kg_year);
-      }
-    });
-  },[getElecAndGas, setAverageElectricity, setAverageGas]);
 
   useEffect(() => {
     setElectricity(electricityUsage * 0.85);
@@ -160,7 +133,7 @@ export function OverallUsage({
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={12}>
+        {/* <Grid item xs={12} md={12}>
           <Grid
             container
             className={"inputGroup"}
@@ -193,7 +166,7 @@ export function OverallUsage({
               </Typography>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Grid

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -41,8 +41,9 @@ export function Welcome({
   setTimeframe,
   suburb,
   setSuburb,
-  postcode,
   setPostcode,
+  setAverageElectricity,
+  setAverageGas,
 }) {
   const theme = useTheme();
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -54,9 +55,8 @@ export function Welcome({
   const [options, setOptions] = useState([]);
 
   const get_options = async () => {
-    //const response = await fetch(`http://104.168.117.112:8000/api/location/`);
     const response = await fetch(`${apiUrl}location`);
-    return await response.json();
+    return response.json();
   };
 
   useEffect(() => {
@@ -80,6 +80,23 @@ export function Welcome({
       ]);
     }
   }, [setPostcode, setSuburb, setOptions]);
+
+  const getElecAndGas = useCallback(async () => {
+    const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
+    return response.json();
+  }, [suburb?.postcode]);
+
+  useEffect(() => {
+    getElecAndGas().then((data) => {
+      setAverageElectricity(data.electricity_emissions_kg_year);
+      setAverageGas(data.gas_emissions_kg_year);
+
+      if (data && data.length > 0) {
+        setAverageElectricity(data[0].electricity_emissions_kg_year);
+        setAverageGas(data[0].gas_emissions_kg_year);
+      }
+    });
+  },[getElecAndGas, setAverageElectricity, setAverageGas]);
 
   useEffect(() => {
     setSuburb(options[0]);

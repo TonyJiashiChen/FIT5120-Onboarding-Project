@@ -36,7 +36,7 @@ const options = {
   },
 };
 
-// const byBillLabels = ["Electricity", "Gas", "Privite Transport"];
+const byBillLabels = ["Electricity", "Gas"];
 
 export function Result({
   lastStep,
@@ -71,7 +71,12 @@ export function Result({
     return Math.max(result, totalCarbonByActivity * 52).toFixed(2);
   }, [result, totalCarbonByActivity]);
 
-  const getComparison = useCallback(() => {
+  const compareMsg = useMemo(() => {
+    if (!suburb.suburb) return "Choose your surburb to see the comparasions";
+    if (!averageResult) {
+      console.log("[WARNING] no average result data found");
+      return "";
+    }
     var percentage = 0;
     if (largestCarbon === 0) {
       return `Congratulations, you don't produce any carbon footprint!`;
@@ -89,41 +94,34 @@ export function Result({
         suburb.suburb
       } average energy usage`;
     }
-  }, [averageElectricity, largestCarbon, suburb.suburb]);
+  }, [averageElectricity, averageResult, largestCarbon, suburb.suburb]);
 
   const convertToYearly = useCallback((value) => {
     return (12 / timeframe.value) * value;
   }, [timeframe.value]);
 
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
-  // const byBillData = useMemo(
-  //   () => ({
-  //     labels: byBillLabels,
-  //     datasets: [
-  //       {
-  //         label: "Carbon footprint",
-  //         data: [convertToYearly(electricity), convertToYearly(gas), convertToYearly(car)],
-  //         backgroundColor: theme.palette.primary.main,
-  //       },
-  //       {
-  //         label: "Neighbor Average Footprint",
-  //         data: [0, 0, 0],
-  //         backgroundColor: theme.palette.secondary.main,
-  //       },
-  //     ],
-  //   }),
-  //   [
-  //     car,
-  //     electricity,
-  //     gas,
-  //     convertToYearly,
-  //     theme.palette.primary.main,
-  //     theme.palette.secondary.main,
-  //   ]
-  // );
+  const byBillData = useMemo(
+    () => ({
+      labels: byBillLabels,
+      datasets: [
+        {
+          label: "Carbon footprint",
+          data: [convertToYearly(electricity), convertToYearly(gas)],
+          backgroundColor: theme.palette.primary.main,
+        },
+        {
+          label: "Neighbor Average Footprint",
+          data: [averageElectricity, averageGas],
+          backgroundColor: theme.palette.secondary.main,
+        },
+      ],
+    }),
+    [convertToYearly, electricity, gas, theme.palette.primary.main, theme.palette.secondary.main, averageElectricity, averageGas]
+  );
 
   const planeRounds = useMemo(() => {
-    return (convertToYearly(largestCarbon) / 0.115 / 758).toFixed(2);
+    return Math.round((convertToYearly(largestCarbon) / 0.115 / 758));
   }, [convertToYearly, largestCarbon])
 
   const byActivityData = useMemo(() => {
@@ -172,54 +170,67 @@ export function Result({
         flights from Sydney to Melbourne
       </Typography>
       <Typography variant="h5" marginTop={3}>
-        <b style={{ color: theme.palette.secondary.main }}>{getComparison()}</b>
+        <b style={{ color: theme.palette.secondary.main }}>{compareMsg}</b>
       </Typography>
-      <Typography variant="h5" sx={{ marginTop: "3rem" }}>
-        Top 3 Carbon-Emitting Activities
-      </Typography>
-      <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
-        Data is in yearly basis
-      </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12}>
-          <Bar
-            style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
-            options={options}
-            data={byActivityData}
-          />
-        </Grid>
-        <Grid item xs={12} md={12}>
-          <Typography 
-            sx={{ color: theme.palette.text.secondary, mt: 4, mb: 2  }}
-            variant="h6"
-          >
-            Tips
-          </Typography>
-          <List>
-            {byActivityData.datasets[0].tip.map((tip, index) => (
-                <ListItem key={index}>
-                    {byActivityData.datasets[0].icon[index]}
-                    <Typography 
-                      sx={{ color: theme.palette.text.secondary, ml: 1 }}
-                    >
-                      {tip}
-                    </Typography>
-                </ListItem>
-            ))}
-          </List>
-        </Grid>
-      </Grid>
-      {/* <Typography variant="h5" sx={{ marginTop: "3rem" }}>
-        Carbon Footprint By Bill Type
-      </Typography>
-      <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
-        Data is in yearly basis
-      </Typography>
-      <Bar
-        style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
-        options={options}
-        data={byBillData}
-      /> */}
+      {
+        totalCarbonByActivity > 0 && (
+          <>
+            <Typography variant="h5" sx={{ marginTop: "3rem" }}>
+              Top 3 Carbon-Emitting Activities
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
+              Data is in yearly basis
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={12}>
+                <Bar
+                  style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
+                  options={options}
+                  data={byActivityData}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Typography 
+                  sx={{ color: theme.palette.text.secondary, mt: 4, mb: 2  }}
+                  variant="h6"
+                >
+                  Tips
+                </Typography>
+                <List>
+                  {byActivityData.datasets[0].tip.map((tip, index) => (
+                      <ListItem key={index}>
+                          {byActivityData.datasets[0].icon[index]}
+                          <Typography 
+                            sx={{ color: theme.palette.text.secondary, ml: 1 }}
+                          >
+                            {tip}
+                          </Typography>
+                      </ListItem>
+                  ))}
+                </List>
+              </Grid>
+            </Grid>
+          </>
+        )
+      }
+      
+      {
+        result > 0 && (
+          <>
+            <Typography variant="h5" sx={{ marginTop: "3rem" }}>
+              Carbon Footprint By Bill Type
+            </Typography>
+            <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
+              Data is in yearly basis
+            </Typography>
+            <Bar
+              style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
+              options={options}
+              data={byBillData}
+            />
+          </>
+        )
+      }
       
       <Button
         style={{ marginTop: "2rem", marginRight: "1rem" }}
