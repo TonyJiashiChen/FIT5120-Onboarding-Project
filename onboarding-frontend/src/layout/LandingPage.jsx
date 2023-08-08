@@ -91,7 +91,7 @@ const LandingPage = () => {
             alt="logo"
           />
           <Typography variant="h3" color="common.white">
-            Carbon Visualizer
+            Carbon Visualiser
           </Typography>
         </div>
 

@@ -99,10 +99,10 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "1rem" }}
       >
-        Welcome to the Carbon Visualizer!
+        Welcome to the Carbon Visualiser!
       </Typography>
       <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
-        This tool will help you visualize the carbon footprint of your daily
+        This tool will help you visualise the carbon footprint of your daily
         activities.
       </Typography>
       <Typography
@@ -133,7 +133,7 @@ export function Welcome({
             helperText="Compare your carbon consumption with your neighbors."
           />
         )}
-        getOptionLabel={(option) => `${option.suburb} ${option.postcode}` || ""}
+        getOptionLabel={(option) => option.suburb || ""}
         disableClearable
       />
 
