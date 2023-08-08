@@ -18,7 +18,7 @@ function App() {
     <Router>
     <div style={{
       backgroundColor: theme.palette.background.default,
-      height: '100vh'
+      height: '100%',
     }}>
       <Routes>
           <Route path="/" element={

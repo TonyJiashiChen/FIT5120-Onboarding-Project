@@ -43,7 +43,7 @@ export const ApplianceWattage = [
     "icon": <AcUnitIcon />
   },
   {
-    "name": "Bathroom light (4*275W lamps)",
+    "name": "Bathroom light",
     "kilowatt": 1.1,
     "icon": <LightIcon />
   },
@@ -63,7 +63,7 @@ export const ApplianceWattage = [
     "icon": <KitchenIcon />
   },
   {
-    "name": "Clothes Dryer (per cycle instead)",
+    "name": "Clothes Dryer (per cycle)",
     "kilowatt": 4,
     "icon": <DryIcon />
   },
@@ -73,7 +73,7 @@ export const ApplianceWattage = [
     "icon": <CoffeeIcon />
   },
   {
-    "name": "Dishwasher (per cycle instead)",
+    "name": "Dishwasher (per cycle)",
     "kilowatt": 2.4,
     "icon": <Flatware />
   },
@@ -148,7 +148,7 @@ export const ApplianceWattage = [
     "icon": <TeaKettleIcon />
   },
   {
-    "name": "Light (1 Incandescent Bulb - 75W)",
+    "name": "Light (1 Incandescent Bulb)",
     "kilowatt": 0.075,
     "icon": <LightbulbIcon />
   },
@@ -218,7 +218,7 @@ export const ApplianceWattage = [
     "icon": <VacuumIcon />
   },
   {
-    "name": "Washing machine (per cycle instead)",
+    "name": "Washing machine (per cycle)",
     "kilowatt": 0.9,
     "icon": <LocalLaundryService />
   }

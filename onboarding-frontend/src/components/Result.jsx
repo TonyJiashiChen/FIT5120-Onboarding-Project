@@ -88,7 +88,7 @@ export function Result({
         suburb.suburb
       } average energy usage`;
     }
-  }, [averageElectricity, largestCarbon]);
+  }, [averageElectricity, largestCarbon, suburb.suburb]);
 
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const byBillData = useMemo(
@@ -133,7 +133,7 @@ export function Result({
       datasets: [
         {
           label: "Carbon footprint",
-          data: topThreeActivitiesByCarbon.map((activity) => activity.carbon),
+          data: topThreeActivitiesByCarbon.map((activity) => activity.carbon * 52),
           backgroundColor: theme.palette.primary.main,
         },
       ],
@@ -171,7 +171,10 @@ export function Result({
         <b style={{ color: theme.palette.secondary.main }}>{getComparison()}</b>
       </Typography>
       <Typography variant="h5" sx={{ marginTop: "3rem" }}>
-        Carbon Footprint By Activity
+        Top 3 Carbon-Emitting Activities
+      </Typography>
+      <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
+        Data is in yearly basis
       </Typography>
       <Bar
         style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
@@ -180,6 +183,9 @@ export function Result({
       />
       <Typography variant="h5" sx={{ marginTop: "3rem" }}>
         Carbon Footprint By Bill Type
+      </Typography>
+      <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
+        Data is in yearly basis
       </Typography>
       <Bar
         style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}

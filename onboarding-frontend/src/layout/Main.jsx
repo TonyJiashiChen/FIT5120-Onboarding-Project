@@ -80,7 +80,7 @@ export function Main() {
   };
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{paddingBottom: '4rem'}}>
         <StepIndicator
           steps={steps}
           activeStep={activeStep}
