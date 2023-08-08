@@ -7,6 +7,8 @@ import { TextField, Typography, Grid, InputAdornment } from "@mui/material";
 import { useEffect, useCallback } from "react";
 import { useTheme } from "@mui/material";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export function OverallUsage({
   activeStep,
   steps,
@@ -50,39 +52,26 @@ export function OverallUsage({
     setResult(electricity + gas + car);
   }, [car, electricity, gas, setResult]);
 
-  const getElectricity = useCallback(async () => {
-    const response = await fetch(
-      `http://104.168.117.112:8000/api/energy/${suburb.postcode}?year=2022&energy_type=Electricity`
-    );
+  const getElecAndGas = useCallback(async () => {
+    const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
+    
     const res = await response.json();
-
-    return res;
-  }, [suburb.postcode]);
-  const getGas = useCallback(async () => {
-    const response = await fetch(
-      `http://104.168.117.112:8000/api/energy/${suburb.postcode}?year=2022&energy_type=Gas`
-    );
-    const res = await response.json();
+    console.log(res)
     return res;
   }, [suburb.postcode]);
 
   useEffect(() => {
-    getElectricity().then((data) => {
-      setAverageElectricity(data.avg_emissions);
-      if (data && data.length > 0) {
-        setAverageElectricity(data[0].avg_emissions);
-      }
-    });
-  }, [getElectricity, setAverageElectricity]);
+    getElecAndGas().then((data) => {
 
-  useEffect(() => {
-    getGas().then((data) => {
-      setAverageGas(data.avg_emissions);
+      setAverageElectricity(data.electricity_emissions_kg_year);
+      setAverageGas(data.gas_emissions_kg_year);
+
       if (data && data.length > 0) {
-        setAverageGas(data[0].avg_emissions);
+        setAverageElectricity(data[0].electricity_emissions_kg_year);
+        setAverageGas(data[0].gas_emissions_kg_year);
       }
     });
-  }, [getGas, setAverageGas]);
+  },[]);
 
   useEffect(() => {
     setElectricity(electricityUsage * 0.85);
