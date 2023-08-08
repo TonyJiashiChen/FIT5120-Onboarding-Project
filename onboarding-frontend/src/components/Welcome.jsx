@@ -57,6 +57,7 @@ export function Welcome({
     if (apiUrl !== undefined) {
       get_options().then((data) => {
         if (data && data.length > 0) {
+          setOptions(data);
           setSuburb(data[0]);
           setPostcode(data[0].postcode);
         }
