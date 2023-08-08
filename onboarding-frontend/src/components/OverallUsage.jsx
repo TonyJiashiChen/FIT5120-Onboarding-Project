@@ -56,7 +56,6 @@ export function OverallUsage({
     const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
     
     const res = await response.json();
-    console.log(res)
     return res;
   }, [suburb.postcode]);
 

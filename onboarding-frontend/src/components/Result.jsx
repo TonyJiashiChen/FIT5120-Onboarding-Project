@@ -1,4 +1,6 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import {
   Chart as ChartJS,
   BarElement,
@@ -71,7 +73,6 @@ export function Result({
 
   const getComparison = useCallback(() => {
     var percentage = 0;
-    console.log(averageElectricity);
     if (largestCarbon === 0) {
       return `Congratulations, you don't produce any carbon footprint!`;
     }
@@ -135,12 +136,14 @@ export function Result({
         {
           label: "Carbon footprint",
           data: topThreeActivitiesByCarbon.map((activity) => activity.carbon * 52),
+          tip: topThreeActivitiesByCarbon.map((activity) => activity.tip),
+          icon: topThreeActivitiesByCarbon.map((activity) => activity.icon),
           backgroundColor: theme.palette.primary.main,
         },
       ],
     };
   }, [activityUsages, theme.palette.primary.main]);
-
+  console.log(byActivityData.datasets[0].icon)
   return (
     <>
       {isScreenLargerThanMd && (
@@ -177,11 +180,35 @@ export function Result({
       <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
         Data is in yearly basis
       </Typography>
-      <Bar
-        style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
-        options={options}
-        data={byActivityData}
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={12}>
+          <Bar
+            style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
+            options={options}
+            data={byActivityData}
+          />
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <Typography 
+            sx={{ color: theme.palette.text.secondary, mt: 4, mb: 2  }}
+            variant="h6"
+          >
+            Tips
+          </Typography>
+          <List>
+            {byActivityData.datasets[0].tip.map((tip, index) => (
+                <ListItem key={index}>
+                    {byActivityData.datasets[0].icon[index]}
+                    <Typography 
+                      sx={{ color: theme.palette.text.secondary, ml: 1 }}
+                    >
+                      {tip}
+                    </Typography>
+                </ListItem>
+            ))}
+          </List>
+        </Grid>
+      </Grid>
       {/* <Typography variant="h5" sx={{ marginTop: "3rem" }}>
         Carbon Footprint By Bill Type
       </Typography>
@@ -193,6 +220,7 @@ export function Result({
         options={options}
         data={byBillData}
       /> */}
+      
       <Button
         style={{ marginTop: "2rem", marginRight: "1rem" }}
         variant="contained"

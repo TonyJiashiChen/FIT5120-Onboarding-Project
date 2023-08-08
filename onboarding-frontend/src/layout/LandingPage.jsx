@@ -1,19 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import TextField from "@mui/material/TextField";
+//import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import InputAdornment from "@mui/material/InputAdornment";
+//import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import PasswordIcon from '@mui/icons-material/Password';
-import IconButton from "@mui/material/IconButton";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
+//import PasswordIcon from '@mui/icons-material/Password';
+//import IconButton from "@mui/material/IconButton";
+//import VisibilityOff from "@mui/icons-material/VisibilityOff";
+//import Visibility from "@mui/icons-material/Visibility";
 
 import Trail from "../components/Trail";
 import { AuthApi } from "../App";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
+//import { ThemeProvider, createTheme } from '@mui/material/styles';
+/*
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -25,30 +25,30 @@ const darkTheme = createTheme({
     }
   },
 });
-
+*/
 
 const LandingPage = () => {
   const theme = useTheme();
 
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  //const [password, setPassword] = useState("");
+  //const [error, setError] = useState(false);
 
   const { setAuth } = useContext(AuthApi);
 
   const navigate = useNavigate();
 
-  const [showPassword, setShowPassword] = useState(false);
+  //const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordCheck = () => {
-    const CORRECT_PASSWORD = "carbonvisualizer";
-    if (password === CORRECT_PASSWORD) {
-      setError(false);
+    //const CORRECT_PASSWORD = "carbonvisualizer";
+    if (true) {
+      //setError(false);
       setAuth(true);
       navigate("/home");
     } else {
-      setError(true);
+      //setError(true);
       setAuth(false);
-      setPassword("");
+      //setPassword("");
     }
   };
 
@@ -107,8 +107,9 @@ const LandingPage = () => {
             carbon footprint?
           </Typography>
         </Trail>
-
+        {/*
         <ThemeProvider theme={darkTheme}>
+          
           <TextField
             error={error}
             helperText={error ? "Incorrect password" : ""}
@@ -147,7 +148,7 @@ const LandingPage = () => {
             }}
           />
         </ThemeProvider>
-
+        */}
         <Button
           variant="contained"
           style={{
