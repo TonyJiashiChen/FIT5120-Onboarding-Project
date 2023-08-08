@@ -172,7 +172,7 @@ export function Welcome({
             helperText="Compare your carbon consumption with your neighbors."
           />
         )}
-        getOptionLabel={(option) => option.suburb || ""}
+        getOptionLabel={(option) => `${option.suburb} (${option.postcode})`}
         disableClearable
       />
 
