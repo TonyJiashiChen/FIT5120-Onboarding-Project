@@ -34,6 +34,8 @@ const timeframes = [
 ];
 
 export function Welcome({
+  stepActivityMode,
+  setStepActivityMode,
   nextStep,
   timeframe,
   setTimeframe,
@@ -44,6 +46,10 @@ export function Welcome({
 }) {
   const theme = useTheme();
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
+
+  const set_mode = () => {
+    setStepActivityMode(!stepActivityMode);
+  }
 
   const [options, setOptions] = useState([]);
 
@@ -209,6 +215,14 @@ export function Welcome({
         onClick={nextStep}
       >
         Next
+      </Button>
+      <Button
+        sx={{ marginTop: "3rem", marginLeft: "1rem" }}
+        disabled={!(suburb && timeframe)}
+        variant="contained"
+        onClick={set_mode}
+      >
+        Switch to Calculate carbon footprint by {stepActivityMode ? 'total bill':'activity'}
       </Button>
     </>
   );

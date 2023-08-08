@@ -15,11 +15,23 @@ const steps = [
     component: <Welcome />,
   },
   {
-    title: "Overall Usage",
+    title: "Activity Usage",
     component: <OverallUsage />,
   },
   {
-    title: "Activity Usage",
+    title: "Result",
+    component: <Result />,
+  },
+];
+
+// steps for carbon footprint calculator
+const stepsActivityMode = [
+  {
+    title: "Welcome",
+    component: <Welcome />,
+  },
+  {
+    title: "Overall Usage",
     component: <ActivityUsage />,
   },
   {
@@ -29,6 +41,10 @@ const steps = [
 ];
 
 export function Main() {
+
+  //step activity mode
+  const [stepActivityMode, setStepActivityMode] = useState(true);
+
   // current active step
   const [activeStep, setActiveStep] = useState(0);
   // postcode info
@@ -79,16 +95,20 @@ export function Main() {
   const lastStep = () => {
     setActiveStep(activeStep - 1);
   };
+
+
   return (
     <>
       <Container maxWidth="lg" sx={{paddingBottom: '4rem'}}>
         <StepIndicator
-          steps={steps}
+          steps={stepActivityMode ? steps:stepsActivityMode}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
         />
         <Paper elevation={3} sx={{ padding: "2rem", position: "relative" }}>
-          {React.cloneElement(steps[activeStep].component, {
+          {stepActivityMode ? React.cloneElement(stepsActivityMode[activeStep].component, {
+            stepActivityMode,
+            setStepActivityMode,
             activeStep,
             steps,
             nextStep,
@@ -118,6 +138,38 @@ export function Main() {
             cleanAndRedo,
             activityUsages,
             setActivityUsages,
+          }):React.cloneElement(steps[activeStep].component, {
+            stepActivityMode,
+            setStepActivityMode,
+            activeStep,
+            steps,
+            nextStep,
+            lastStep,
+            suburb,
+            setSuburb,
+            postcode,
+            setPostcode,
+            timeframe,
+            setTimeframe,
+            electricity,
+            setElectricity,
+            gas,
+            setGas,
+            car,
+            setCar,
+            result,
+            setResult,
+            averageElectricity,
+            setAverageElectricity,
+            averageGas,
+            setAverageGas,
+            averageEnergy,
+            setAverageEnergy,
+            averageResult,
+            setAverageResult,
+            cleanAndRedo,
+            activityUsages,
+            setActivityUsages
           })}
         </Paper>
       </Container>
