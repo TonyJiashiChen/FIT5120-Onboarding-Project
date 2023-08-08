@@ -15,7 +15,7 @@ code {
 }
 
 html {
-  height: 100%;
+  height: fit-content;
 }
 
 #root {
