@@ -71,7 +71,7 @@ export function OverallUsage({
         setAverageGas(data[0].gas_emissions_kg_year);
       }
     });
-  },[]);
+  },[getElecAndGas, setAverageElectricity, setAverageGas]);
 
   useEffect(() => {
     setElectricity(electricityUsage * 0.85);

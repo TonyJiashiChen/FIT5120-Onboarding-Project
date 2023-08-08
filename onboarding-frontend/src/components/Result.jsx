@@ -34,7 +34,7 @@ const options = {
   },
 };
 
-const byBillLabels = ["Electricity", "Gas", "Privite Transport"];
+// const byBillLabels = ["Electricity", "Gas", "Privite Transport"];
 
 export function Result({
   lastStep,
@@ -95,31 +95,31 @@ export function Result({
   }, [timeframe.value]);
 
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
-  const byBillData = useMemo(
-    () => ({
-      labels: byBillLabels,
-      datasets: [
-        {
-          label: "Carbon footprint",
-          data: [convertToYearly(electricity), convertToYearly(gas), convertToYearly(car)],
-          backgroundColor: theme.palette.primary.main,
-        },
-        {
-          label: "Neighbor Average Footprint",
-          data: [0, 0, 0],
-          backgroundColor: theme.palette.secondary.main,
-        },
-      ],
-    }),
-    [
-      car,
-      electricity,
-      gas,
-      convertToYearly,
-      theme.palette.primary.main,
-      theme.palette.secondary.main,
-    ]
-  );
+  // const byBillData = useMemo(
+  //   () => ({
+  //     labels: byBillLabels,
+  //     datasets: [
+  //       {
+  //         label: "Carbon footprint",
+  //         data: [convertToYearly(electricity), convertToYearly(gas), convertToYearly(car)],
+  //         backgroundColor: theme.palette.primary.main,
+  //       },
+  //       {
+  //         label: "Neighbor Average Footprint",
+  //         data: [0, 0, 0],
+  //         backgroundColor: theme.palette.secondary.main,
+  //       },
+  //     ],
+  //   }),
+  //   [
+  //     car,
+  //     electricity,
+  //     gas,
+  //     convertToYearly,
+  //     theme.palette.primary.main,
+  //     theme.palette.secondary.main,
+  //   ]
+  // );
 
   const planeRounds = useMemo(() => {
     return (convertToYearly(largestCarbon) / 0.115 / 758).toFixed(2);
@@ -182,7 +182,7 @@ export function Result({
         options={options}
         data={byActivityData}
       />
-      <Typography variant="h5" sx={{ marginTop: "3rem" }}>
+      {/* <Typography variant="h5" sx={{ marginTop: "3rem" }}>
         Carbon Footprint By Bill Type
       </Typography>
       <Typography variant="subtitle1" sx={{ color: theme.palette.text.secondary }}>
@@ -192,7 +192,7 @@ export function Result({
         style={{ maxWidth: 500, marginTop: "1rem", marginBottom: "1rem" }}
         options={options}
         data={byBillData}
-      />
+      /> */}
       <Button
         style={{ marginTop: "2rem", marginRight: "1rem" }}
         variant="contained"
