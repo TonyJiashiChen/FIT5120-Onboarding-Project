@@ -70,6 +70,7 @@ export function Main() {
     setAverageGas(0);
     setAverageEnergy(0);
     setAverageResult("");
+    setActivityUsages([]);
   }, []);
 
   const nextStep = () => {

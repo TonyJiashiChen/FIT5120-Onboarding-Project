@@ -90,6 +90,10 @@ export function Result({
     }
   }, [averageElectricity, largestCarbon, suburb.suburb]);
 
+  const convertToYearly = useCallback((value) => {
+    return (12 / timeframe.value) * value;
+  }, [timeframe.value]);
+
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const byBillData = useMemo(
     () => ({
@@ -97,7 +101,7 @@ export function Result({
       datasets: [
         {
           label: "Carbon footprint",
-          data: [electricity, gas, car],
+          data: [convertToYearly(electricity), convertToYearly(gas), convertToYearly(car)],
           backgroundColor: theme.palette.primary.main,
         },
         {
@@ -111,18 +115,15 @@ export function Result({
       car,
       electricity,
       gas,
+      convertToYearly,
       theme.palette.primary.main,
       theme.palette.secondary.main,
     ]
   );
 
-  const convertToYearly = (value) => {
-    return (12 / timeframe.value) * value;
-  };
-
-  const getPlaneRounds = () => {
-    return (convertToYearly(result) / 0.115 / 758).toFixed(2);
-  };
+  const planeRounds = useMemo(() => {
+    return (convertToYearly(largestCarbon) / 0.115 / 758).toFixed(2);
+  }, [convertToYearly, largestCarbon])
 
   const byActivityData = useMemo(() => {
     const topThreeActivitiesByCarbon = activityUsages
@@ -164,7 +165,7 @@ export function Result({
         Similar With Carbon Emission
       </Typography>
       <Typography variant="h4" marginTop={1}>
-        <b style={{ color: theme.palette.primary.main }}>{getPlaneRounds()}</b>{" "}
+        <b style={{ color: theme.palette.primary.main }}>{planeRounds}</b>{" "}
         flights from Sydney to Melbourne
       </Typography>
       <Typography variant="h5" marginTop={3}>
