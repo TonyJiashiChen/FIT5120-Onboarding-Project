@@ -31,7 +31,7 @@ const options = {
     y: {
       stacked: true,
     },
-  }
+  },
 };
 
 const byBillLabels = ["Electricity", "Gas", "Privite Transport"];
@@ -66,31 +66,29 @@ export function Result({
   }, [activityUsages]);
 
   const largestCarbon = useMemo(() => {
-    return Math.max(
-      result,
-      totalCarbonByActivity * 52,
-    ).toFixed(2);
+    return Math.max(result, totalCarbonByActivity * 52).toFixed(2);
   }, [result, totalCarbonByActivity]);
 
   const getComparison = useCallback(() => {
     var percentage = 0;
+    console.log(averageElectricity);
     if (largestCarbon === 0) {
-      return `Congrats, you don't produce any carbon footprint!`;
+      return `Congratulations, you don't produce any carbon footprint!`;
     }
-    if (averageElectricity + averageGas > largestCarbon) {
+    if (averageElectricity > largestCarbon) {
       percentage =
-        ((averageElectricity + averageGas - largestCarbon) /
-          (averageElectricity + averageGas)) *
-        100;
-      return `Congrats, you are ${percentage.toFixed(2)}% less than average`;
-    } else if (averageElectricity + averageGas < largestCarbon) {
+        ((averageElectricity - largestCarbon) / averageElectricity) * 100;
+      return `Congratulations, you are ${percentage.toFixed(2)}% less than ${
+        suburb.suburb
+      } average energy usage`;
+    } else if (averageElectricity < largestCarbon) {
       percentage =
-        ((largestCarbon - (averageElectricity + averageGas)) /
-          (averageElectricity + averageGas)) *
-        100;
-      return `You are ${percentage.toFixed(2)}% more than average`;
+        ((largestCarbon - averageElectricity) / averageElectricity) * 100;
+      return `You are ${percentage.toFixed(2)}% more than ${
+        suburb.suburb
+      } average energy usage`;
     }
-  }, [averageElectricity, averageGas, largestCarbon]);
+  }, [averageElectricity, largestCarbon]);
 
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
   const byBillData = useMemo(
@@ -127,9 +125,9 @@ export function Result({
   };
 
   const byActivityData = useMemo(() => {
-    const topThreeActivitiesByCarbon = activityUsages.sort(
-      (a, b) => b.carbon - a.carbon
-    ).slice(0, 3);
+    const topThreeActivitiesByCarbon = activityUsages
+      .sort((a, b) => b.carbon - a.carbon)
+      .slice(0, 3);
     return {
       labels: topThreeActivitiesByCarbon.map((activity) => activity.name),
       datasets: [
@@ -160,9 +158,7 @@ export function Result({
         Your yearly carbon emission would be
       </Typography>
       <Typography variant="h2" sx={{ marginTop: "1rem" }}>
-        <b style={{ color: theme.palette.primary.main }}>
-          { largestCarbon } kg{" "}
-        </b>
+        <b style={{ color: theme.palette.primary.main }}>{largestCarbon} kg </b>
       </Typography>
       <Typography variant="h5" sx={{ marginTop: "2rem" }}>
         Similar With Carbon Emission
