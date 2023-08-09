@@ -71,6 +71,10 @@ export function ActivityUsage({
               sx={{ marginLeft: "1rem", marginTop: "1rem", maxHeight: 56 }}
               startIcon={<AddIcon />}
               onClick={() => {
+                if (currentActivity === "") {
+                  setActivitySelectHelperMessage("Please select an activity");
+                  return;
+                }
                 const existed = activityUsages.find(
                   (activity) => activity.name === currentActivity.name
                 );
