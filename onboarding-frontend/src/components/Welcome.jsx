@@ -93,7 +93,10 @@ export function Welcome({
       const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
       return response.json();
     } else {
-      return Promise.reject("No postcode");
+      return {
+        electricity_emissions_kg_year: 3991,
+        gas_emissions_kg_year: 3389,
+      };
     }
   }, [suburb?.postcode]);
 

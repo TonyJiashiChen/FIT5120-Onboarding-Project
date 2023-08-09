@@ -67,8 +67,8 @@ export function ActivityUsage({
               disableClearable
             />
             <Button
-              variant="outlined"
-              sx={{ marginLeft: "1rem", marginTop: "1rem" }}
+              variant="contained"
+              sx={{ marginLeft: "1rem", marginTop: "1rem", maxHeight: 56 }}
               startIcon={<AddIcon />}
               onClick={() => {
                 const existed = activityUsages.find(
@@ -95,7 +95,7 @@ export function ActivityUsage({
             </Button>
           </Grid>
 
-          <Grid container item xs={12} md={8} marginTop={6}>
+          <Grid container item xs={12} md={12} marginTop={6}>
             {activityUsages.length > 0 && (
               <Typography variant="h5" marginBottom={3}>
                 Enter the hours you spend on each activity per week
@@ -139,7 +139,7 @@ export function ActivityUsage({
                             const newactivityUsages = [...activityUsages];
                             newactivityUsages[index].hours = value;
                             newactivityUsages[index].carbon =
-                            newactivityUsages[index].kilowatt * value * 0.85;
+                              newactivityUsages[index].kilowatt * value * 0.85;
                             setActivityUsages(newactivityUsages);
                           }
                         }}
@@ -153,7 +153,12 @@ export function ActivityUsage({
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4} md={4} style={{height: "100%", maxHeight: 72}}>
+                    <Grid
+                      item
+                      xs={4}
+                      md={4}
+                      style={{ height: "100%", maxHeight: 72 }}
+                    >
                       <Button
                         variant="outlined"
                         size={isScreenLargerThanXs ? "medium" : "small"}
@@ -175,41 +180,37 @@ export function ActivityUsage({
                 );
               })}
           </Grid>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-            sx={{
-              marginTop: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifySelf: "center",
-            }}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{
+            marginTop: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifySelf: "center",
+          }}
+        >
+          <Typography sx={{ fontSize: "1.1rem" }}>
+            Total Carbon Footprint
+          </Typography>
+          <Typography sx={{ fontSize: "4rem" }}>
+            <span style={{ color: theme.palette.primary.main }}>
+              {result.toFixed(2)}
+            </span>
+          </Typography>
+          <Typography
+            sx={{ fontSize: "1.3rem", color: theme.palette.text.secondary }}
           >
-            <Typography sx={{ fontSize: "1.1rem" }}>
-              Total Carbon Footprint
-            </Typography>
-            <Typography sx={{ fontSize: "4rem" }}>
-              <span style={{ color: theme.palette.primary.main }}>
-                {result.toFixed(2)}
-              </span>
-            </Typography>
-            <Typography
-              sx={{ fontSize: "1.3rem", color: theme.palette.text.secondary }}
-            >
-              kg CO2
-            </Typography>
-          </Grid>
+            kg CO2
+          </Typography>
+        </Grid>
       </Grid>
       <Box marginTop={4}>
         <Button
-          variant="contained"
-          style={{
-            backgroundColor: "white",
-            color: theme.palette.primary.main,
-          }}
+          variant="outlined"
           onClick={lastStep}
         >
           Back
