@@ -78,12 +78,23 @@ export function Welcome({
           longitude: 145.2562723381787,
         },
       ]);
+      setSuburb({
+        postcode: 3802,
+        suburb: "Endeavour Hills",
+        latitude: -37.97020387932868,
+        longitude: 145.2562723381787,
+      });
+      setPostcode(3802);
     }
   }, [setPostcode, setSuburb, setOptions]);
 
   const getElecAndGas = useCallback(async () => {
-    const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
-    return response.json();
+    if (suburb?.postcode) {
+      const response = await fetch(`${apiUrl}energy/${suburb.postcode}?year=2022`);
+      return response.json();
+    } else {
+      return Promise.reject("No postcode");
+    }
   }, [suburb?.postcode]);
 
   useEffect(() => {
@@ -95,6 +106,8 @@ export function Welcome({
         setAverageElectricity(data[0].electricity_emissions_kg_year);
         setAverageGas(data[0].gas_emissions_kg_year);
       }
+    }).catch((err) => {
+      console.log(err);
     });
   },[getElecAndGas, setAverageElectricity, setAverageGas]);
 
@@ -189,8 +202,7 @@ export function Welcome({
             key={tf.value}
             variant={tf.value === timeframe.value ? "elevation" : "outlined"}
             sx={{
-              minWidth: 200,
-              maxWidth: 300,
+              width: 200,
               marginTop: "1rem",
               border:
                 tf.value === timeframe.value
@@ -205,7 +217,7 @@ export function Welcome({
             >
               <CardContent
                 sx={{
-                  height: 120,
+                  height: 60,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -214,7 +226,7 @@ export function Welcome({
                 {tf.icon}
                 <Typography
                   gutterBottom
-                  variant="h5"
+                  variant="h6"
                   component="div"
                   sx={{ marginBottom: 0, marginLeft: "5px" }}
                 >
