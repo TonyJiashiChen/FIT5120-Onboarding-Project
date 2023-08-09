@@ -225,10 +225,10 @@ export function Result({
           </>
         )
       }
-      {totalCarbonByActivity > 0 && (
+      {totalCarbonByActivity > 0 && activityUsages.length > 0 && (
         <>
           <Typography variant="h5" sx={{ marginTop: "3rem" }}>
-            Top 3 Carbon-Emitting Activities
+            Top {Math.min(3, activityUsages.length)} Carbon-Emitting Activities
           </Typography>
           <Typography
             variant="subtitle1"
@@ -250,7 +250,7 @@ export function Result({
             </Grid>
             <Grid item xs={12} md={7}>
               <Typography sx={{ mt: 3, mb: 2 }} variant="h5">
-                Tips For Your Top 3 Activities
+                Tips For Your Top {Math.min(3, activityUsages.length)} Activities
               </Typography>
               <List>
                 {byActivityData.datasets[0].tip.map((tip, index) => (
