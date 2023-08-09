@@ -30,10 +30,10 @@ const options = {
   responsive: true,
   scales: {
     x: {
-      stacked: true,
+      stacked: false,
     },
     y: {
-      stacked: true,
+      stacked: false,
     },
   },
 };
