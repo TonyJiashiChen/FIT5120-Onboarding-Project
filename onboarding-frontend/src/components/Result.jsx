@@ -177,20 +177,20 @@ export function Result({
           }}
         />
       )}
-      <Typography variant="h4" sx={{ marginTop: "1rem" }}>
+      <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: "none" }}>
         Your yearly carbon emission would be
       </Typography>
-      <Typography variant="h2" sx={{ marginTop: "1rem" }}>
+      <Typography variant="h2" sx={{ marginTop: "1rem", userSelect: "none" }}>
         <b style={{ color: theme.palette.primary.main }}>{largestCarbon} kg </b>
       </Typography>
-      <Typography variant="h5" sx={{ marginTop: "2rem" }}>
+      <Typography variant="h5" sx={{ marginTop: "2rem", userSelect: "none" }}>
         Similar With Carbon Emission
       </Typography>
-      <Typography variant="h4" marginTop={1}>
+      <Typography variant="h4" marginTop={1} sx={{userSelect: "none"}}>
         <b style={{ color: theme.palette.primary.main }}>{planeRounds}</b>{" "}
         flights from Sydney to Melbourne
       </Typography>
-      <Typography variant="h5" marginTop={4}>
+      <Typography variant="h5" marginTop={4} sx={{userSelect: "none"}}>
         <b style={{ color: theme.palette.primary.main }}>{
           compareMsg.message
         }</b>
@@ -215,7 +215,7 @@ export function Result({
                 )
               }
             </Typography>
-            <Typography variant="h5" marginTop={1}>
+            <Typography variant="h5" marginTop={1} sx={{userSelect: "none"}}>
               {
                 compareMsg?.message3 && (
                   <b style={{ color: theme.palette.primary.main }}> {compareMsg.message3} </b>
@@ -227,12 +227,12 @@ export function Result({
       }
       {totalCarbonByActivity > 0 && activityUsages.length > 0 && (
         <>
-          <Typography variant="h5" sx={{ marginTop: "3rem" }}>
+          <Typography variant="h5" sx={{ marginTop: "3rem", userSelect: "none" }}>
             Top {Math.min(3, activityUsages.length)} Carbon-Emitting Activities
           </Typography>
           <Typography
             variant="subtitle1"
-            sx={{ color: theme.palette.text.secondary }}
+            sx={{ color: theme.palette.text.secondary, userSelect: "none" }}
           >
             Data is in yearly basis
           </Typography>

@@ -53,7 +53,7 @@ export function OverallUsage({
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
-        <Typography variant="h4" sx={{ marginTop: "1rem" }}>
+        <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: "none" }}>
           Calculate Overall Carbon Footprint
         </Typography>
       </Grid>
@@ -74,7 +74,7 @@ export function OverallUsage({
             marginBottom={4}
           >
             <Grid item xs={12} md={3}>
-              <Typography variant="h6">Electricity:</Typography>
+              <Typography variant="h6" sx={{ userSelect: "none" }}>Electricity:</Typography>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
@@ -93,7 +93,7 @@ export function OverallUsage({
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark}}>
+              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark, userSelect: 'none' }}>
               ≈ {electricity.toFixed(2)} kg CO2
               </Typography>
             </Grid>
@@ -108,7 +108,7 @@ export function OverallUsage({
             marginBottom={4}
           >
             <Grid item xs={12} md={3}>
-              <Typography variant="h6">Gas:</Typography>
+              <Typography variant="h6" sx={{userSelect: 'none'}}>Gas:</Typography>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
@@ -127,7 +127,7 @@ export function OverallUsage({
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark }}>
+              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark, userSelect: 'none' }}>
                 ≈ {gas.toFixed(2)} kg CO2
               </Typography>
             </Grid>
@@ -181,15 +181,15 @@ export function OverallUsage({
           alignItems: "center",
         }}
       >
-        <Typography sx={{ fontSize: "1.1rem" }}>
+        <Typography sx={{ fontSize: "1.1rem", userSelect: 'none' }}>
           Total Carbon Footprint
         </Typography>
         <Typography
-          sx={{ fontSize: "4rem" }}
+          sx={{ fontSize: "4rem", userSelect: 'none' }}
         >
           <span style={{ color: theme.palette.primary.main }}>{result.toFixed(2)}</span>
         </Typography>
-        <Typography sx={{ fontSize: "1.3rem", color: theme.palette.text.secondary }}>kg CO2</Typography>
+        <Typography sx={{ fontSize: "1.3rem", color: theme.palette.text.secondary, userSelect: 'none' }}>kg CO2</Typography>
       </Grid>
 
       <Grid container item md={12} sx={{ marginTop: "1rem" }}>

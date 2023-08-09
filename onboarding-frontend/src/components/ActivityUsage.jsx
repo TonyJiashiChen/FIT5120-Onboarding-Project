@@ -30,7 +30,7 @@ export function ActivityUsage({
   const isScreenLargerThanXs = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <>
-      <Typography variant="h4" sx={{ marginTop: "1rem" }}>
+      <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: 'none' }}>
         Know Your Carbon Footprint By Activity
       </Typography>
       <Grid container>
