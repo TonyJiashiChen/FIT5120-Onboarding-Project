@@ -206,11 +206,6 @@ export function OverallUsage({
                 onChange={(event) => {
                   handleNumericInputChange(event, setGasUsage);
                 }}
-                onInput={(e) => {
-                  e.target.value = Math.max(0, parseInt(e.target.value))
-                    .toString()
-                    .slice(0, 6);
-                }}
                 variant="outlined"
                 InputProps={{
                   endAdornment: (
