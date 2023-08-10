@@ -331,7 +331,8 @@ export function Result({
         )}
         {result > 0 && (
           <Grid container item xs={12} md={12} marginTop={2}>
-            <Card style={{ padding: "2rem", borderRadius: "5px" }}>
+            <Grid item xs={12} md={7}>
+            <Card style={{ padding: "2rem", boxSizing: 'border-box', borderRadius: "5px", width: "100%" }}>
               <Typography style={{ fontSize: "1.5rem" }}>
                 Carbon Footprint By Bill Type
               </Typography>
@@ -341,7 +342,7 @@ export function Result({
               >
                 Data is in yearly basis
               </Typography>
-              <Box height={"400px"} maxWidth={500}>
+              <Box height={400} width="100%">
                 <Bar
                   style={{
                     marginTop: "1rem",
@@ -352,6 +353,7 @@ export function Result({
                 />
               </Box>
             </Card>
+            </Grid>
           </Grid>
         )}
       </Grid>
