@@ -1,0 +1,55 @@
+ .IntroPaper{
+    height: 400px;
+    margin-right: 10px;
+ }
+
+ .IntroPaper:hover {
+  transform: scale(1.01);
+}
+
+.IntroPic {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    padding-left: 3rem;
+    /* padding-top: 1rem;
+    padding-bottom: 1rem; */
+    width: 55%;
+    height: 55%;
+}
+
+.IntroIcon {
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    .IconText {
+        margin-left: 5%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .IntroPaper {
+        height: 132px;
+        padding: 10px;
+    }
+
+    .IntroTitle {
+        padding-bottom: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .IntroPic {
+        display: none;
+    }
+
+    .IntroIcon {
+        display:inline;
+        width: 3em;
+        height: 3em;
+        margin-right: 0.5rem;
+    }
+}

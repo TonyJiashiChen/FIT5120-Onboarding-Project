@@ -6,8 +6,8 @@ const Trail = ({ open, children }) => {
   const trail = useTrail(items.length, {
     config: { mass: 5, tension: 2000, friction: 200 },
     opacity: open ? 1 : 0,
-    x: open ? 0 : 20,
-    height: open ? 70 : 0,
+    x: open ? 0 : 0,
+    height: open ? 400 : 0,
     from: { opacity: 0, x: 20, height: 0 },
   });
 
