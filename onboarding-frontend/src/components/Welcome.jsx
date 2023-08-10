@@ -143,7 +143,7 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "2rem", userSelect: "none" }}
       >
-        Select a suburb for comparasion
+        Select a suburb for comparison
       </Typography>
       <Autocomplete
         disablePortal
@@ -176,7 +176,7 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "2rem", userSelect: "none" }}
       >
-        Pick either Activity or Bill-based Carbon Calculation.
+        Pick Activity or Bill-based Carbon Calculation.
       </Typography>
       <Typography
         variant="subtitle1"
