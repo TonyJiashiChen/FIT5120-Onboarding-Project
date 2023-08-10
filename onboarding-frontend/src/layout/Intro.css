@@ -1,11 +1,14 @@
  .IntroPaper{
     height: 400px;
-    margin-right: 10px;
  }
 
- .IntroPaper:hover {
-  transform: scale(1.01);
-}
+ .IntroPaperBox{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+ }
+
 
 .IntroPic {
     display: flexbox;
@@ -33,6 +36,12 @@
         height: 132px;
         padding: 10px;
     }
+
+    .IntroPaperBox{
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+     }
 
     .IntroTitle {
         padding-bottom: 0.5rem;

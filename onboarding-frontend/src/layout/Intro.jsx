@@ -1,4 +1,5 @@
 import React from "react"
+import { useSpring, a } from 'react-spring';
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper"
@@ -13,10 +14,12 @@ export default function Intro(){
     
     const theme = useTheme();
 
+
     return(
         <Container>
-                <Grid container spacing={2.5}>
+                <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
+                            <ScaleOnHover>
                             <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>
                                 
                                 <div className="IconText">
@@ -36,7 +39,7 @@ export default function Intro(){
                                     justifyContent="center"
                                     alignItems="center"
                                     textAlign="center"
-                                    padding={3}
+                                    className="IntroPaperBox"
                                 >
                                 <img className="IntroPic"
                                 src="/environmental_factory.svg"
@@ -50,9 +53,11 @@ export default function Intro(){
                                 </Typography>
                                 </Box>
                             </Paper>
+                            </ScaleOnHover>
                         </Grid>
                         
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <ScaleOnHover>
                             <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>   
                                 <div className="IconText">
                                     <img className="IntroIcon"       
@@ -70,7 +75,7 @@ export default function Intro(){
                                     justifyContent="center"
                                     alignItems="center"
                                     textAlign="center"
-                                    padding={3}
+                                    className="IntroPaperBox"
                                 >
                                 <img className="IntroPic"
                                 src="/environmental_study.svg"
@@ -84,9 +89,11 @@ export default function Intro(){
                                 </Typography>
                                 </Box>
                             </Paper>
+                            </ScaleOnHover>
                         </Grid>
                         
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <ScaleOnHover>
                             <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>                        
                                 <div className="IconText">
                                     <img className="IntroIcon"       
@@ -103,8 +110,7 @@ export default function Intro(){
                                     flexDirection="column"
                                     justifyContent="center"
                                     alignItems="center"
-                                    textAlign="center"
-                                    padding={3}
+                                    className="IntroPaperBox"
                                 >
                                 <img className="IntroPic"
                                 src="/environmental_change.svg"
@@ -117,8 +123,31 @@ export default function Intro(){
                                 </Typography>
                                 </Box>
                             </ Paper>
+                            </ScaleOnHover>
                         </Grid>
                 </Grid>
         </Container>
     )
 }
+
+const ScaleOnHover = ({ children }) => {
+    const [springProps, setSpringProps] = useSpring(() => ({
+      transform: 'scale(1)',
+      config: {
+        tension: 400, 
+        friction: 40,
+      }
+    }));
+  
+    return (
+      <a.div
+        style={springProps}
+        onMouseEnter={() => setSpringProps({ transform: 'scale(1.02)' })}
+        onMouseLeave={() => setSpringProps({ transform: 'scale(1)' })}
+        onTouchStart={() => setSpringProps({ transform: 'scale(1.02)' })}
+        onTouchEnd={() => setSpringProps({ transform: 'scale(1)' })}
+      >
+        {children}
+      </a.div>
+    );
+  }
