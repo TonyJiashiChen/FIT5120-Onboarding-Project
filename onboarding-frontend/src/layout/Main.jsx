@@ -9,7 +9,6 @@ import { Result } from "../components/Result";
 import { ActivityUsage } from "../components/ActivityUsage";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import Button from "@mui/material/Button";
 
 // bill based steps for carbon footprint calculator
 const stepsBillMode = [
@@ -74,6 +73,8 @@ export function Main() {
   const [averageResult, setAverageResult] = useState("");
   // activity usages
   const [activityUsages, setActivityUsages] = useState([]);
+  // screen size larger than md
+  const isScreenLargerThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -83,8 +84,6 @@ export function Main() {
   // resets all user inputs and results
   const cleanAndRedo = useCallback(() => {
     setActiveStep(0);
-    setPostcode("");
-    setSuburb("");
     setTimeframe({
       label: "One Month",
       value: 1,
@@ -93,10 +92,6 @@ export function Main() {
     setGas(0);
     setCar(0);
     setResult(0);
-    setAverageElectricity(0);
-    setAverageGas(0);
-    setAverageEnergy(0);
-    setAverageResult("");
     setActivityUsages([]);
   }, []);
 
@@ -116,22 +111,13 @@ export function Main() {
 
   return (
     <>
-      <Container maxWidth="lg" sx={{ paddingBottom: "4rem" }}>
+      <Container maxWidth="lg" sx={{ paddingBottom: "4rem", paddingX: isScreenLargerThanMd?null:0  }}>
         <StepIndicator
           steps={stepActivityMode ? stepsBillMode : stepsActivityMode}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
         />
-
-        <Paper
-          elevation={3}
-          sx={{
-            padding: "2rem",
-            position: "relative",
-            borderRadius: "1rem",
-            backgroundColor: "#F9F6F7",
-          }}
-        >
+        <Paper elevation={3} sx={{ padding: isScreenLargerThanMd?"2rem":"1.5rem", position: "relative", borderRadius:isScreenLargerThanMd?'5px':0,backgroundColor:'#f9f9f9'}}>
           {React.cloneElement(
             stepActivityMode
               ? stepsActivityMode[activeStep].component

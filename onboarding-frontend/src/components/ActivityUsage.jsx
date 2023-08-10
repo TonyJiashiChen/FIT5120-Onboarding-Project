@@ -33,8 +33,9 @@ export function ActivityUsage({
       <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: "none" }}>
         Know Your Carbon Footprint By Activity
       </Typography>
+
       <Grid container>
-        <Grid item xs={12} md={8} marginTop={5}>
+        <Grid item xs={12} md={8} marginTop={4}>
           <Typography variant="h5">Add your activity</Typography>
 
           <Grid container item xs={12} md={12} marginTop={1}>
@@ -99,7 +100,7 @@ export function ActivityUsage({
             </Button>
           </Grid>
 
-          <Grid container item xs={12} md={12} marginTop={6}>
+          <Grid container item xs={12} md={12} marginTop={5}>
             {activityUsages.length > 0 && (
               <Typography variant="h5" marginBottom={3}>
                 Enter the hours you spend on each activity per week
@@ -217,31 +218,33 @@ export function ActivityUsage({
           </Typography>
         </Grid>
       </Grid>
-      <Button
-        variant="outlined"
-        onClick={lastStep}
-        sx={{
-          marginTop: "2rem",
-          color: "primary.main",
-          backgroundColor: "white",
-          width: "6rem",
-        }}
-      >
-        Back
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        sx={{
-          marginTop: "2rem",
-          marginLeft: "1rem",
-          color: "white",
-          width: "6rem",
-        }}
-        onClick={nextStep}
-      >
-        Next
-      </Button>
+        <Button
+            variant="outlined"
+            onClick={lastStep}
+            sx={{
+                marginTop: '3rem',
+                color: "primary.main",
+                backgroundColor: "white",
+                width: '6rem'
+            }}
+        >
+            Back
+        </Button>
+        <Button
+            variant="contained"
+            color="primary"
+            sx={{
+                marginTop: '3rem',
+                marginLeft: '1rem',
+                color: "white",
+                width: '6rem'
+
+            }}
+
+            onClick={nextStep}
+        >
+            Next
+        </Button>
     </>
   );
 }

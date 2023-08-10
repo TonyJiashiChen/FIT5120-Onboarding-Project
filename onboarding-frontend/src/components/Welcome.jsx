@@ -8,29 +8,24 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useTheme } from "@mui/material";
-import TodayIcon from "@mui/icons-material/Today";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const timeframes = [
+const calculatorModes = [
   {
-    label: "One Month",
-    value: 1,
-    icon: <TodayIcon />,
+    label: "Activity Based",
+    isActivityBased: true,
+    icon: <DryCleaningIcon />,
   },
   {
-    label: "Three Months",
-    value: 3,
-    icon: <DateRangeIcon />,
-  },
-  {
-    label: "One Year",
-    value: 12,
-    icon: <CalendarMonthIcon />,
-  },
+    label: "Utility Bill Based",
+    isActivityBased: false,
+    icon: <ReceiptLongIcon />,
+  }
 ];
 
 export function Welcome({
@@ -44,13 +39,10 @@ export function Welcome({
   setPostcode,
   setAverageElectricity,
   setAverageGas,
+  cleanAndRedo,
 }) {
   const theme = useTheme();
   const isScreenLargerThanMd = useMediaQuery(theme.breakpoints.up("md"));
-
-  const set_mode = () => {
-    setStepActivityMode(!stepActivityMode);
-  }
 
   const [options, setOptions] = useState([]);
 
@@ -140,10 +132,10 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "1rem", userSelect: "none" }}
       >
-        Welcome to the Carbon Visualiser!
+        Welcome to the Carbon Visualizer!
       </Typography>
       <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, userSelect: "none" }}>
-        This tool will help you visualise the carbon footprint of your daily
+        This tool will help you visualize the carbon footprint of your daily
         activities.
       </Typography>
       <Typography
@@ -178,19 +170,20 @@ export function Welcome({
         disableClearable
       />
 
+
       <Typography
         variant="h5"
         component="div"
         sx={{ flexGrow: 1, marginTop: "2rem", userSelect: "none" }}
       >
-        Select a billing period
+        Pick either Activity or Bill-based Carbon Calculation.
       </Typography>
       <Typography
         variant="subtitle1"
         component="div"
         sx={{ flexGrow: 1, marginTop: "0.5rem", userSelect: "none" }}
       >
-        Your selection: <b>{timeframe.label}</b>
+        Your selection: <b>{stepActivityMode? calculatorModes[0].label: calculatorModes[1].label}</b>
       </Typography>
 
       <div
@@ -202,22 +195,23 @@ export function Welcome({
           gap: "1rem",
         }}
       >
-        {timeframes.map((tf) => (
+        {calculatorModes.map((mode) => (
           <Card
-            key={tf.value}
-            variant={tf.value === timeframe.value ? "elevation" : "outlined"}
+            key={mode.label}
+            variant={mode.isActivityBased === stepActivityMode ? "elevation" : "outlined"}
             sx={{
               width: 200,
               marginTop: "1rem",
               border:
-                tf.value === timeframe.value
+                mode.isActivityBased === stepActivityMode
                   ? `3px solid ${theme.palette.primary.main}`
                   : `2px dashed ${theme.palette.primary.main}`,
             }}
           >
             <CardActionArea
               onClick={() => {
-                setTimeframe(tf);
+                cleanAndRedo();
+                setStepActivityMode(mode.isActivityBased);
               }}
             >
               <CardContent
@@ -228,35 +222,29 @@ export function Welcome({
                   alignItems: "center",
                 }}
               >
-                {tf.icon}
+                {mode.icon}
                 <Typography
                   gutterBottom
                   variant="h6"
                   component="div"
                   sx={{ marginBottom: 0, marginLeft: "5px" }}
                 >
-                  {tf.label}
+                  {mode.label}
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         ))}
       </div>
+
+      
       <Button
         sx={{ marginTop: "3rem",width: "6rem" }}
-        disabled={!(suburb && timeframe)}
+        disabled={!suburb}
         variant="contained"
-        onClick={()=>{setStepActivityMode(false);nextStep()}}
+        onClick={()=>{nextStep()}}
       >
-        Bill
-      </Button>
-      <Button
-          sx={{ marginTop: "3rem",width: "6rem",marginLeft: "1rem" }}
-        disabled={!(suburb && timeframe)}
-        variant="contained"
-        onClick={()=>{setStepActivityMode(true);nextStep()}}
-      >
-        Activity
+        Next
       </Button>
     </>
   );
