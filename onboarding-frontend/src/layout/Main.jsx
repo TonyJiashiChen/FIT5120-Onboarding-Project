@@ -7,6 +7,9 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { Result } from "../components/Result";
 import { ActivityUsage } from "../components/ActivityUsage";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
+import Button from "@mui/material/Button";
 
 // bill based steps for carbon footprint calculator
 const stepsBillMode = [
@@ -72,6 +75,11 @@ export function Main() {
   // activity usages
   const [activityUsages, setActivityUsages] = useState([]);
 
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
+
   // resets all user inputs and results
   const cleanAndRedo = useCallback(() => {
     setActiveStep(0);
@@ -114,7 +122,16 @@ export function Main() {
           activeStep={activeStep}
           setActiveStep={setActiveStep}
         />
-        <Paper elevation={3} sx={{ padding: "2rem", position: "relative", borderRadius:'1rem',backgroundColor:'#F9F6F7'}}>
+
+        <Paper
+          elevation={3}
+          sx={{
+            padding: "2rem",
+            position: "relative",
+            borderRadius: "1rem",
+            backgroundColor: "#F9F6F7",
+          }}
+        >
           {React.cloneElement(
             stepActivityMode
               ? stepsActivityMode[activeStep].component

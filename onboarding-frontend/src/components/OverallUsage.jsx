@@ -1,7 +1,4 @@
-import {
-  Button,
-  Box
-} from "@mui/material";
+import { Button, Box } from "@mui/material";
 import React, { useState } from "react";
 import { TextField, Typography, Grid, InputAdornment } from "@mui/material";
 import { useEffect } from "react";
@@ -58,13 +55,7 @@ export function OverallUsage({
         </Typography>
       </Grid>
 
-      <Grid
-        container
-        item
-        xs={12}
-        md={8}
-        marginTop={4}
-      >
+      <Grid container item xs={12} md={8} marginTop={4}>
         <Grid item xs={12} md={12}>
           <Grid
             container
@@ -74,7 +65,9 @@ export function OverallUsage({
             marginBottom={4}
           >
             <Grid item xs={12} md={3}>
-              <Typography variant="h6" sx={{ userSelect: "none" }}>Electricity:</Typography>
+              <Typography variant="h6" sx={{ userSelect: "none" }}>
+                Electricity:
+              </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
@@ -83,6 +76,11 @@ export function OverallUsage({
                 value={electricityUsage}
                 onChange={(event) => {
                   handleNumericInputChange(event, setElectricityUsage);
+                }}
+                onInput={(e) => {
+                  e.target.value = Math.max(0, parseInt(e.target.value))
+                    .toString()
+                    .slice(0, 6);
                 }}
                 variant="outlined"
                 InputProps={{
@@ -93,8 +91,12 @@ export function OverallUsage({
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark, userSelect: 'none' }}>
-              ≈ {electricity.toFixed(2)} kg CO2
+              <Typography
+                marginLeft={2}
+                variant="h6"
+                sx={{ color: theme.palette.primary.dark, userSelect: "none" }}
+              >
+                ≈ {electricity.toFixed(2)} kg CO2
               </Typography>
             </Grid>
           </Grid>
@@ -108,7 +110,9 @@ export function OverallUsage({
             marginBottom={4}
           >
             <Grid item xs={12} md={3}>
-              <Typography variant="h6" sx={{userSelect: 'none'}}>Gas:</Typography>
+              <Typography variant="h6" sx={{ userSelect: "none" }}>
+                Gas:
+              </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
@@ -117,6 +121,11 @@ export function OverallUsage({
                 value={gasUsage}
                 onChange={(event) => {
                   handleNumericInputChange(event, setGasUsage);
+                }}
+                onInput={(e) => {
+                  e.target.value = Math.max(0, parseInt(e.target.value))
+                    .toString()
+                    .slice(0, 6);
                 }}
                 variant="outlined"
                 InputProps={{
@@ -127,7 +136,11 @@ export function OverallUsage({
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <Typography marginLeft={2} variant="h6" sx={{ color: theme.palette.primary.dark, userSelect: 'none' }}>
+              <Typography
+                marginLeft={2}
+                variant="h6"
+                sx={{ color: theme.palette.primary.dark, userSelect: "none" }}
+              >
                 ≈ {gas.toFixed(2)} kg CO2
               </Typography>
             </Grid>
@@ -181,42 +194,49 @@ export function OverallUsage({
           alignItems: "center",
         }}
       >
-        <Typography sx={{ fontSize: "1.1rem", userSelect: 'none' }}>
+        <Typography sx={{ fontSize: "1.1rem", userSelect: "none" }}>
           Total Carbon Footprint
         </Typography>
-        <Typography
-          sx={{ fontSize: "4rem", userSelect: 'none' }}
-        >
-          <span style={{ color: theme.palette.primary.main }}>{result.toFixed(2)}</span>
+        <Typography sx={{ fontSize: "4rem", userSelect: "none" }}>
+          <span style={{ color: theme.palette.primary.main }}>
+            {result.toFixed(2)}
+          </span>
         </Typography>
-        <Typography sx={{ fontSize: "1.3rem", color: theme.palette.text.secondary, userSelect: 'none' }}>kg CO2</Typography>
+        <Typography
+          sx={{
+            fontSize: "1.3rem",
+            color: theme.palette.text.secondary,
+            userSelect: "none",
+          }}
+        >
+          kg CO2
+        </Typography>
       </Grid>
 
       <Grid container item md={12} sx={{ marginTop: "1rem" }}>
         <Grid item xs={12} md={12}>
           <Button
-              variant="outlined"
-              onClick={lastStep}
-              sx={{
-                marginTop: '2rem',
-                color: "primary.main",
-                backgroundColor: "white",
-                width: '6rem'
-              }}
+            variant="outlined"
+            onClick={lastStep}
+            sx={{
+              marginTop: "2rem",
+              color: "primary.main",
+              backgroundColor: "white",
+              width: "6rem",
+            }}
           >
             Back
           </Button>
           <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                marginTop: '2rem',
-                marginLeft: '1rem',
-                color: "white",
-                width: '6rem'
-              }}
-
-              onClick={nextStep}
+            variant="contained"
+            color="primary"
+            sx={{
+              marginTop: "2rem",
+              marginLeft: "1rem",
+              color: "white",
+              width: "6rem",
+            }}
+            onClick={nextStep}
           >
             Next
           </Button>

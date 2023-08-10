@@ -59,6 +59,7 @@ export function Welcome({
     return response.json();
   };
 
+
   useEffect(() => {
     if (apiUrl !== undefined) {
       get_options().then((data) => {
@@ -120,6 +121,7 @@ export function Welcome({
 
   return (
     <>
+    
       {isScreenLargerThanMd && (
         <img
           src="/environment_iaus.svg"
@@ -244,7 +246,7 @@ export function Welcome({
         sx={{ marginTop: "3rem",width: "6rem" }}
         disabled={!(suburb && timeframe)}
         variant="contained"
-        onClick={()=>{setStepActivityMode(true);nextStep()}}
+        onClick={()=>{setStepActivityMode(false);nextStep()}}
       >
         Bill
       </Button>
@@ -252,7 +254,7 @@ export function Welcome({
           sx={{ marginTop: "3rem",width: "6rem",marginLeft: "1rem" }}
         disabled={!(suburb && timeframe)}
         variant="contained"
-        onClick={()=>{setStepActivityMode(false);nextStep()}}
+        onClick={()=>{setStepActivityMode(true);nextStep()}}
       >
         Activity
       </Button>

@@ -30,7 +30,7 @@ export function ActivityUsage({
   const isScreenLargerThanXs = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <>
-      <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: 'none' }}>
+      <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: "none" }}>
         Know Your Carbon Footprint By Activity
       </Typography>
       <Grid container>
@@ -136,6 +136,11 @@ export function ActivityUsage({
                             ? activityUsages[index].hours
                             : ""
                         }
+                        onInput={(e) => {
+                          e.target.value = Math.max(0, parseInt(e.target.value))
+                            .toString()
+                            .slice(0, 6);
+                        }}
                         onChange={(event) => {
                           const value = event.target.value;
                           const numericRegex = /^[0-9]*$/;
@@ -212,33 +217,31 @@ export function ActivityUsage({
           </Typography>
         </Grid>
       </Grid>
-        <Button
-            variant="outlined"
-            onClick={lastStep}
-            sx={{
-                marginTop: '2rem',
-                color: "primary.main",
-                backgroundColor: "white",
-                width: '6rem'
-            }}
-        >
-            Back
-        </Button>
-        <Button
-            variant="contained"
-            color="primary"
-            sx={{
-                marginTop: '2rem',
-                marginLeft: '1rem',
-                color: "white",
-                width: '6rem'
-
-            }}
-
-            onClick={nextStep}
-        >
-            Next
-        </Button>
+      <Button
+        variant="outlined"
+        onClick={lastStep}
+        sx={{
+          marginTop: "2rem",
+          color: "primary.main",
+          backgroundColor: "white",
+          width: "6rem",
+        }}
+      >
+        Back
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          marginTop: "2rem",
+          marginLeft: "1rem",
+          color: "white",
+          width: "6rem",
+        }}
+        onClick={nextStep}
+      >
+        Next
+      </Button>
     </>
   );
 }
