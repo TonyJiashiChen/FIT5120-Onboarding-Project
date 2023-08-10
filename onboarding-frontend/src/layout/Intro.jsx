@@ -2,22 +2,22 @@ import React from "react"
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper"
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Container} from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import { PrimaryMainTheme } from "./PrimaryMainTheme";
+import { useTheme } from "@mui/material";
 
 import "./Intro.css"
 
 export default function Intro(){
-    var w = window.innerWidth;
-    console.log("hello this is ", w)
+    
+    const theme = useTheme();
+
     return(
         <Container>
-            <ThemeProvider theme={PrimaryMainTheme}>
                 <Grid container spacing={2.5}>
                     <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
-                            <Paper className="IntroPaper" sx={{backgroundColor: 'primary.main', p:1}}>
+                            <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>
                                 
                                 <div className="IconText">
                                     <img className="IntroIcon"    
@@ -30,6 +30,14 @@ export default function Intro(){
                                     </Typography>
                                 </div>
 
+                                <Box
+                                    display='flex'
+                                    flexDirection="column"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    textAlign="center"
+                                    padding={3}
+                                >
                                 <img className="IntroPic"
                                 src="/environmental_factory.svg"
                                 alt="environmental factory"
@@ -40,11 +48,12 @@ export default function Intro(){
                                 It helps Victorian households achieve sustainability living 
                                 and create a greener future for the community.
                                 </Typography>
+                                </Box>
                             </Paper>
                         </Grid>
                         
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                            <Paper className="IntroPaper" sx={{backgroundColor: 'primary.main', p:1}}>   
+                            <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>   
                                 <div className="IconText">
                                     <img className="IntroIcon"       
                                     src="/environmental_world.svg"
@@ -55,7 +64,14 @@ export default function Intro(){
                                     What is my impact?
                                     </Typography>
                                 </div>  
-
+                                <Box
+                                    display='flex'
+                                    flexDirection="column"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    textAlign="center"
+                                    padding={3}
+                                >
                                 <img className="IntroPic"
                                 src="/environmental_study.svg"
                                 alt="environmental study"
@@ -66,11 +82,12 @@ export default function Intro(){
                                     with the average for your suburb based on 2 provided options, 
                                     helping you assess your environmental performance.
                                 </Typography>
+                                </Box>
                             </Paper>
                         </Grid>
                         
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                            <Paper className="IntroPaper" sx={{backgroundColor: 'primary.main', p:1}}>                        
+                            <Paper className="IntroPaper" sx={{backgroundColor: theme.palette.primary.dark, p:1}}>                        
                                 <div className="IconText">
                                     <img className="IntroIcon"       
                                     src="/environmental_successful.svg"
@@ -81,7 +98,14 @@ export default function Intro(){
                                         What can I do?
                                     </Typography>
                                 </div>
-
+                                <Box
+                                    display='flex'
+                                    flexDirection="column"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    textAlign="center"
+                                    padding={3}
+                                >
                                 <img className="IntroPic"
                                 src="/environmental_change.svg"
                                 alt="environmental change"
@@ -91,10 +115,10 @@ export default function Intro(){
                                     The Carbon Visualiser allows you to compares each of your activity's carbon footprint 
                                     and provides call-to-action suggestions specific to the top 3 carbon emitting activities.
                                 </Typography>
+                                </Box>
                             </ Paper>
                         </Grid>
                 </Grid>
-            </ThemeProvider>
         </Container>
     )
 }

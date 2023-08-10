@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 //import TextField from "@mui/material/TextField";
@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Intro from "./Intro";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 //import PasswordIcon from '@mui/icons-material/Password';
 //import IconButton from "@mui/material/IconButton";
 //import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -55,18 +56,20 @@ const LandingPage = () => {
     }
   };
 
+  useEffect(() => {
+    document.body.style.backgroundColor = theme.palette.primary.main;
+    return () => {document.body.style.backgroundColor = theme.palette.background.default};
+  }, [theme.palette.primary.main, theme.palette.background.default]);
+
   return (
-    <div>
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          height: '100vh',
-          flexDirection: "column",
-          justifyContent: "center",
+      <Box
+        height="100vh" 
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        sx={{
           backgroundColor: theme.palette.primary.main,
-          zIndex: 10,
         }}
       >
         <div
@@ -74,7 +77,6 @@ const LandingPage = () => {
             display: "flex",
             maxHeight: "20%",
             marginTop: "1rem",
-            alignItems: "center",
             flexDirection: "row",
             marginBottom: "2rem",
           }}
@@ -161,8 +163,7 @@ const LandingPage = () => {
             </Button>
           </Grid>
         </Grid>
-      </div>
-    </div>
+      </Box>
   );
 };
 
