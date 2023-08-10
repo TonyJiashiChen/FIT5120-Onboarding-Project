@@ -114,7 +114,7 @@ export function Main() {
           activeStep={activeStep}
           setActiveStep={setActiveStep}
         />
-        <Paper elevation={3} sx={{ padding: "2rem", position: "relative" }}>
+        <Paper elevation={3} sx={{ padding: "2rem", position: "relative", borderRadius:'1rem',backgroundColor:'#F9F6F7'}}>
           {React.cloneElement(
             stepActivityMode
               ? stepsActivityMode[activeStep].component

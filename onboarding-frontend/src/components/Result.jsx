@@ -11,6 +11,7 @@ import {Bar} from "react-chartjs-2";
 import {useTheme} from "@emotion/react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 
 ChartJS.register(BarElement, Title, Tooltip, Legend, CategoryScale, LinearScale);
 ChartJS.defaults.font.size = 16;
@@ -240,7 +241,7 @@ export function Result({
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={5}>
-                                        <Typography style={{fontSize: '1.5rem', marginTop: '1rem', padding:'1rem'}}>
+                                        <Typography style={{fontSize: '1.5rem', marginTop: '1rem', padding: '1rem'}}>
                                             {'◉\u00A0\u00A0\u00A0\u00A0Tips'}
                                         </Typography>
                                         <List>
@@ -284,20 +285,34 @@ export function Result({
 
         </Grid>
 
-
         <Button
-            style={{marginTop: "2rem", marginRight: "1rem"}}
+            variant="outlined"
+            onClick={lastStep}
+            sx={{
+                marginTop: '2rem',
+                color: "primary.main",
+                backgroundColor: "white",
+                width: '6rem'
+            }}
+        >
+            Back
+        </Button>
+        <Button
             variant="contained"
+            color="primary"
+            sx={{
+                marginTop: '2rem',
+                marginLeft: '1rem',
+                color: "white",
+                width: '6rem'
+
+            }}
+
             onClick={cleanAndRedo}
         >
             Reset
         </Button>
-        <Button
-            style={{marginTop: "2rem"}}
-            variant="outlined"
-            onClick={lastStep}
-        >
-            Back
-        </Button>
+
+
     </>);
 }

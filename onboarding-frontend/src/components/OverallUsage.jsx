@@ -194,26 +194,32 @@ export function OverallUsage({
 
       <Grid container item md={12} sx={{ marginTop: "1rem" }}>
         <Grid item xs={12} md={12}>
-          <Box>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: "white",
-                color: theme.palette.primary.main,
-              }}
+          <Button
+              variant="outlined"
               onClick={lastStep}
-            >
-              Back
-            </Button>
-            <Button
+              sx={{
+                marginTop: '2rem',
+                color: "primary.main",
+                backgroundColor: "white",
+                width: '6rem'
+              }}
+          >
+            Back
+          </Button>
+          <Button
               variant="contained"
               color="primary"
+              sx={{
+                marginTop: '2rem',
+                marginLeft: '1rem',
+                color: "white",
+                width: '6rem'
+              }}
+
               onClick={nextStep}
-              sx={{ marginLeft: 2 }}
-            >
-              Next
-            </Button>
-          </Box>
+          >
+            Next
+          </Button>
         </Grid>
       </Grid>
     </Grid>

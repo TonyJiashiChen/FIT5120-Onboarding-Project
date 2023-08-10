@@ -212,22 +212,33 @@ export function ActivityUsage({
           </Typography>
         </Grid>
       </Grid>
-      <Box marginTop={4}>
         <Button
-          variant="outlined"
-          onClick={lastStep}
+            variant="outlined"
+            onClick={lastStep}
+            sx={{
+                marginTop: '2rem',
+                color: "primary.main",
+                backgroundColor: "white",
+                width: '6rem'
+            }}
         >
-          Back
+            Back
         </Button>
         <Button
-          variant="contained"
-          color="primary"
-          onClick={nextStep}
-          sx={{ marginLeft: 2 }}
+            variant="contained"
+            color="primary"
+            sx={{
+                marginTop: '2rem',
+                marginLeft: '1rem',
+                color: "white",
+                width: '6rem'
+
+            }}
+
+            onClick={nextStep}
         >
-          Next
+            Next
         </Button>
-      </Box>
     </>
   );
 }

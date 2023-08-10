@@ -241,20 +241,20 @@ export function Welcome({
         ))}
       </div>
       <Button
-        sx={{ marginTop: "3rem" }}
+        sx={{ marginTop: "3rem",width: "6rem" }}
         disabled={!(suburb && timeframe)}
         variant="contained"
-        onClick={nextStep}
+        onClick={()=>{setStepActivityMode(true);nextStep()}}
       >
-        Next
+        Bill
       </Button>
       <Button
-        sx={{ marginTop: "3rem", marginLeft: "1rem" }}
+          sx={{ marginTop: "3rem",width: "6rem",marginLeft: "1rem" }}
         disabled={!(suburb && timeframe)}
         variant="contained"
-        onClick={set_mode}
+        onClick={()=>{setStepActivityMode(false);nextStep()}}
       >
-        Switch to Calculate carbon footprint by {stepActivityMode ? 'total bill':'activity'}
+        Activity
       </Button>
     </>
   );
