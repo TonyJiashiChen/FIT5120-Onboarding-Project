@@ -110,6 +110,7 @@ export default function Intro(){
                                     flexDirection="column"
                                     justifyContent="center"
                                     alignItems="center"
+                                    textAlign="center"
                                     className="IntroPaperBox"
                                 >
                                 <img className="IntroPic"
