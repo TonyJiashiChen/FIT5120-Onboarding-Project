@@ -7,8 +7,7 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { Result } from "../components/Result";
 import { ActivityUsage } from "../components/ActivityUsage";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
+import { useMediaQuery } from "@mui/material";
 
 // bill based steps for carbon footprint calculator
 const stepsBillMode = [
@@ -75,11 +74,6 @@ export function Main() {
   const [activityUsages, setActivityUsages] = useState([]);
   // screen size larger than md
   const isScreenLargerThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
-
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
 
   // resets all user inputs and results
   const cleanAndRedo = useCallback(() => {

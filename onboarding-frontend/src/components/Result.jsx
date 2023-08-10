@@ -295,15 +295,15 @@ export function Result({
                     >
                       Data is in yearly basis
                     </Typography>
-                    <Box height={'400px'}>
-                        <Bar
+                    <Box height={"400px"}>
+                      <Bar
                         style={{
-                            marginTop: "1rem",
-                            marginBottom: "1rem",
+                          marginTop: "1rem",
+                          marginBottom: "1rem",
                         }}
                         options={options}
                         data={byActivityData}
-                        />
+                      />
                     </Box>
                   </Grid>
                   <Grid item xs={12} md={5}>
@@ -330,7 +330,7 @@ export function Result({
           </>
         )}
         {result > 0 && (
-          <Grid container item xs={12} md={12}>
+          <Grid container item xs={12} md={12} marginTop={2}>
             <Card style={{ padding: "2rem", borderRadius: "5px" }}>
               <Typography style={{ fontSize: "1.5rem" }}>
                 Carbon Footprint By Bill Type
@@ -341,10 +341,16 @@ export function Result({
               >
                 Data is in yearly basis
               </Typography>
-              <Bar style={{
-                        marginTop: "1rem",
-                        marginBottom: "1rem",
-                      }} options={options} data={byBillData} />
+              <Box height={"400px"} maxWidth={500}>
+                <Bar
+                  style={{
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                  options={options}
+                  data={byBillData}
+                />
+              </Box>
             </Card>
           </Grid>
         )}

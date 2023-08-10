@@ -218,33 +218,31 @@ export function ActivityUsage({
           </Typography>
         </Grid>
       </Grid>
-        <Button
-            variant="outlined"
-            onClick={lastStep}
-            sx={{
-                marginTop: '3rem',
-                color: "primary.main",
-                backgroundColor: "white",
-                width: '6rem'
-            }}
-        >
-            Back
-        </Button>
-        <Button
-            variant="contained"
-            color="primary"
-            sx={{
-                marginTop: '3rem',
-                marginLeft: '1rem',
-                color: "white",
-                width: '6rem'
-
-            }}
-
-            onClick={nextStep}
-        >
-            Next
-        </Button>
+      <Button
+        variant="outlined"
+        onClick={lastStep}
+        sx={{
+          marginTop: "3rem",
+          color: "primary.main",
+          backgroundColor: "white",
+          width: "6rem",
+        }}
+      >
+        Back
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          marginTop: "3rem",
+          marginLeft: "1rem",
+          color: "white",
+          width: "6rem",
+        }}
+        onClick={nextStep}
+      >
+        Next
+      </Button>
     </>
   );
 }
