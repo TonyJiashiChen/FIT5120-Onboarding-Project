@@ -35,7 +35,6 @@ export function Result({
   lastStep,
   electricity,
   gas,
-  result,
   timeframe,
   cleanAndRedo,
   suburb,
@@ -54,9 +53,13 @@ export function Result({
     return activityUsages.reduce((acc, curr) => acc + curr.carbon, 0);
   }, [activityUsages]);
 
+  const totalCarbonByBill = useMemo(() => {
+    return (electricity + gas) * (12 / timeframe.value);
+  }, [electricity, gas, timeframe.value]);
+
   const largestCarbon = useMemo(() => {
-    return Math.max(result, totalCarbonByActivity * 52).toFixed(2);
-  }, [result, totalCarbonByActivity]);
+    return Math.max(totalCarbonByBill, totalCarbonByActivity * 52).toFixed(2);
+  }, [totalCarbonByBill, totalCarbonByActivity]);
 
   const compareMsg = useMemo(() => {
     if (!suburb.suburb)
@@ -329,7 +332,7 @@ export function Result({
             </Grid>
           </>
         )}
-        {result > 0 && (
+        {totalCarbonByBill > 0 && (
           <Grid container item xs={12} md={12} marginTop={2}>
             <Grid item xs={12} md={7}>
             <Card style={{ padding: "2rem", boxSizing: 'border-box', borderRadius: "5px", width: "100%" }}>

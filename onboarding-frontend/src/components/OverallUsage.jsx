@@ -29,19 +29,13 @@ const timeframes = [
 ];
 
 export function OverallUsage({
-  activeStep,
-  steps,
   nextStep,
   lastStep,
   electricity,
   gas,
-  car,
-  result,
   setElectricity,
   setGas,
   setCar,
-  setResult,
-  suburb,
   timeframe,
   setTimeframe,
 }) {
@@ -63,10 +57,6 @@ export function OverallUsage({
     setElectricity(electricityUsage * 0.85);
     setGas(gasUsage * 11.7 * 0.02);
   }, [carUsage, electricityUsage, gasUsage, setCar, setElectricity, setGas]);
-
-  useEffect(() => {
-    setResult(electricity + gas + car);
-  }, [car, electricity, gas, setResult]);
 
   useEffect(() => {
     setElectricity(electricityUsage * 0.85);
@@ -298,7 +288,7 @@ export function OverallUsage({
         </Typography>
         <Typography sx={{ fontSize: "4rem", userSelect: "none" }}>
           <span style={{ color: theme.palette.primary.main }}>
-            {result.toFixed(2)}
+            {(electricity + gas).toFixed(2)}
           </span>
         </Typography>
         <Typography
