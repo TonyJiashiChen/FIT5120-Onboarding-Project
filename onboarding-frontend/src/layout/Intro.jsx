@@ -62,7 +62,7 @@ export default function Intro(){
                                 /> 
 
                                 <Typography variant="h7" color="common.white" display="inline-block" overflow="hidden">
-                                    The Carbon Visualizer contrasts your total carbon footprint 
+                                    The Carbon Visualiser contrasts your total carbon footprint 
                                     with the average for your suburb based on 2 provided options, 
                                     helping you assess your environmental performance.
                                 </Typography>

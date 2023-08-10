@@ -132,10 +132,10 @@ export function Welcome({
         component="div"
         sx={{ flexGrow: 1, marginTop: "1rem", userSelect: "none" }}
       >
-        Welcome to the Carbon Visualizer!
+        Welcome to the Carbon Visualiser!
       </Typography>
       <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, userSelect: "none" }}>
-        This tool will help you visualize the carbon footprint of your daily
+        This tool will help you visualise the carbon footprint of your daily
         activities.
       </Typography>
       <Typography

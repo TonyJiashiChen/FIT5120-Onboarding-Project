@@ -62,6 +62,7 @@ const LandingPage = () => {
           position: "relative",
           display: "flex",
           alignItems: "center",
+          height: '100vh',
           flexDirection: "column",
           justifyContent: "center",
           backgroundColor: theme.palette.primary.main,

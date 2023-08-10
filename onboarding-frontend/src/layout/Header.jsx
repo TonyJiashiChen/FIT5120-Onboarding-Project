@@ -12,7 +12,7 @@ export function Header() {
           <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', flexDirection: 'row' }}>
             <img src='/favicon-white.png' style={{height: '32px', marginRight: '1rem'}} alt='logo' />
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Carbon Visualizer
+              Carbon Visualiser
             </Typography>
           </Link>
         </Toolbar>
