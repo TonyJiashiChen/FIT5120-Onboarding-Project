@@ -48,7 +48,7 @@ export function OverallUsage({
   const handleNumericInputChange = (event, setterFunc) => {
     const value = event.target.value;
     const numericRegex = /^[0-9]*$/; // This regex matches any string that contains only digits.
-    if (numericRegex.test(value) || value === "") {
+    if ((numericRegex.test(value) || value === "")&& value <= 100000) {
       setterFunc(value);
     }
   };
@@ -165,11 +165,6 @@ export function OverallUsage({
                 value={electricityUsage}
                 onChange={(event) => {
                   handleNumericInputChange(event, setElectricityUsage);
-                }}
-                onInput={(e) => {
-                  e.target.value = Math.max(0, parseInt(e.target.value))
-                    .toString()
-                    .slice(0, 6);
                 }}
                 variant="outlined"
                 InputProps={{

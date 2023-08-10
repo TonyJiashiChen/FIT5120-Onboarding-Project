@@ -137,15 +137,10 @@ export function ActivityUsage({
                             ? activityUsages[index].hours
                             : ""
                         }
-                        onInput={(e) => {
-                          e.target.value = Math.max(0, parseInt(e.target.value))
-                            .toString()
-                            .slice(0, 6);
-                        }}
                         onChange={(event) => {
                           const value = event.target.value;
                           const numericRegex = /^[0-9]*$/;
-                          if (numericRegex.test(value) || value === "") {
+                          if ((numericRegex.test(value) || value === "") && value <= 100000) {
                             const newactivityUsages = [...activityUsages];
                             newactivityUsages[index].hours = value;
                             newactivityUsages[index].carbon =
