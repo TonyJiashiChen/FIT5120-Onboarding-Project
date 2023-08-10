@@ -93,6 +93,7 @@ export function Main() {
   const nextStep = useCallback(() => {
     if (activeStep < stepsBillMode.length - 1) {
       setActiveStep(activeStep + 1);
+      window?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [setActiveStep, activeStep]);
 
@@ -100,6 +101,7 @@ export function Main() {
   const lastStep = useCallback(() => {
     if (activeStep > 0) {
       setActiveStep(activeStep - 1);
+      window?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [setActiveStep, activeStep]);
 
