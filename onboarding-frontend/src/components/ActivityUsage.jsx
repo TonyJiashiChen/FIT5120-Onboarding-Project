@@ -30,7 +30,7 @@ export function ActivityUsage({
   const isScreenLargerThanXs = useMediaQuery(theme.breakpoints.up("sm"));
   return (
     <>
-      <Typography variant="h4" sx={{ marginTop: "1rem" }}>
+      <Typography variant="h4" sx={{ marginTop: "1rem", userSelect: 'none' }}>
         Know Your Carbon Footprint By Activity
       </Typography>
       <Grid container>
@@ -71,6 +71,10 @@ export function ActivityUsage({
               sx={{ marginLeft: "1rem", marginTop: "1rem", maxHeight: 56 }}
               startIcon={<AddIcon />}
               onClick={() => {
+                if (currentActivity === "") {
+                  setActivitySelectHelperMessage("Please select an activity");
+                  return;
+                }
                 const existed = activityUsages.find(
                   (activity) => activity.name === currentActivity.name
                 );

@@ -136,18 +136,18 @@ export function Welcome({
       <Typography
         variant="h4"
         component="div"
-        sx={{ flexGrow: 1, marginTop: "1rem" }}
+        sx={{ flexGrow: 1, marginTop: "1rem", userSelect: "none" }}
       >
         Welcome to the Carbon Visualiser!
       </Typography>
-      <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
+      <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1, userSelect: "none" }}>
         This tool will help you visualise the carbon footprint of your daily
         activities.
       </Typography>
       <Typography
         variant="h5"
         component="div"
-        sx={{ flexGrow: 1, marginTop: "2rem" }}
+        sx={{ flexGrow: 1, marginTop: "2rem", userSelect: "none" }}
       >
         Select a suburb for comparasion
       </Typography>
@@ -179,14 +179,14 @@ export function Welcome({
       <Typography
         variant="h5"
         component="div"
-        sx={{ flexGrow: 1, marginTop: "2rem" }}
+        sx={{ flexGrow: 1, marginTop: "2rem", userSelect: "none" }}
       >
         Select a billing period
       </Typography>
       <Typography
         variant="subtitle1"
         component="div"
-        sx={{ flexGrow: 1, marginTop: "0.5rem" }}
+        sx={{ flexGrow: 1, marginTop: "0.5rem", userSelect: "none" }}
       >
         Your selection: <b>{timeframe.label}</b>
       </Typography>
