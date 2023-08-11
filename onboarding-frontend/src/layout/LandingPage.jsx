@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 //import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 //import InputAdornment from "@mui/material/InputAdornment";
@@ -14,7 +15,9 @@ import Box from "@mui/material/Box";
 //import Visibility from "@mui/icons-material/Visibility";
 
 import Trail from "../components/Trail";
+
 import { AuthApi } from "../App";
+
 
 //import { ThemeProvider, createTheme } from '@mui/material/styles';
 /*
@@ -33,6 +36,8 @@ const darkTheme = createTheme({
 
 const LandingPage = () => {
   const theme = useTheme();
+
+  const isScreenLargerThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   //const [password, setPassword] = useState("");
   //const [error, setError] = useState(false);
@@ -75,23 +80,24 @@ const LandingPage = () => {
         <div
           style={{
             display: "flex",
-            maxHeight: "20%",
+            height: "20%",
             marginTop: "1rem",
             flexDirection: "row",
-            marginBottom: "2rem",
           }}
         >
           <img
             src="/favicon-white.png"
             style={{
               height: "2.8rem",
-              marginLeft: "1rem",
+              marginLeft: isScreenLargerThanMd ? "1rem":"",
               marginRight: "1rem",
-              marginTop: "0.5rem",
             }}
             alt="logo"
           />
-          <Typography variant="h3" color="common.white">
+          <Typography 
+            variant={isScreenLargerThanMd ? "h3": "h4"}
+            color="common.white"
+          >
             Carbon Visualiser
           </Typography>
         </div>
@@ -147,7 +153,7 @@ const LandingPage = () => {
             <Button
               variant="contained"
               style={{
-                marginBottom: "4rem ",
+                marginBottom: isScreenLargerThanMd ? "4rem":"",
                 marginTop: "8rem",
                 maxWidth: "200px",
                 maxHeight: "100px",

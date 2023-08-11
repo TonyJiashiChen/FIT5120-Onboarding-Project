@@ -7,12 +7,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Container} from "@mui/material";
 import { useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 import "./Intro.css"
 
 export default function Intro(){
     
     const theme = useTheme();
+    const isScreenLargerThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
 
     return(
@@ -46,7 +48,14 @@ export default function Intro(){
                                 alt="environmental factory"
                                 /> 
 
-                                <Typography variant="h7" color="common.white" display="inline-block" overflow="hidden">
+                                <Typography 
+                                    sx={{
+                                        fontSize: isScreenLargerThanMd ? "1rem" : "0.8rem",
+                                    }}
+                                    color="common.white" 
+                                    display="inline-block" 
+                                    overflow="hidden"
+                                >
                                 Carbon footprint quantifies individual environmental impact.
                                 It helps Victorian households achieve sustainability living 
                                 and create a greener future for the community.
@@ -82,7 +91,14 @@ export default function Intro(){
                                 alt="environmental study"
                                 /> 
 
-                                <Typography variant="h7" color="common.white" display="inline-block" overflow="hidden">
+                                <Typography 
+                                    sx={{
+                                        fontSize: isScreenLargerThanMd ? "1rem" : "0.8rem",
+                                    }}
+                                    color="common.white" 
+                                    display="inline-block" 
+                                    overflow="hidden"
+                                >
                                     The Carbon Visualiser contrasts your total carbon footprint 
                                     with the average for your suburb based on 2 provided options, 
                                     helping you assess your environmental performance.
@@ -118,8 +134,15 @@ export default function Intro(){
                                 alt="environmental change"
                                 />                                
 
-                                <Typography variant="h7" color="common.white" display="inline-block" overflow="hidden">
-                                    The Carbon Visualiser allows you to compares each of your activity's carbon footprint 
+                                <Typography 
+                                    sx={{
+                                        fontSize: isScreenLargerThanMd ? "1rem" : "0.8rem",
+                                    }}
+                                    color="common.white" 
+                                    display="inline-block" 
+                                    overflow="hidden"
+                                >
+                                    The Carbon Visualiser allows you to compare each of your activity's carbon footprint 
                                     and provides call-to-action suggestions specific to the top 3 carbon emitting activities.
                                 </Typography>
                                 </Box>
