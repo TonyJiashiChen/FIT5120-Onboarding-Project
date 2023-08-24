@@ -11,6 +11,10 @@ COPY . .
 # Build the app
 RUN npm run build --production
 
+# Set environment variables
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Bundle static assets with nginx
 FROM nginx:1.21.0-alpine as frontend-production
 ENV NODE_ENV production

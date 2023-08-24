@@ -23,7 +23,11 @@ services:
       - db
 
   frontend:
-    build: ./onboarding-frontend/
+    build: 
+      context: ./onboarding-frontend/
+      args: 
+        - REACT_APP_API_URL=http://34.129.1.154:8000/api/
+    
     image: frontend-production
     ports:
       - "80:80" # <local-host>:<container-port>
