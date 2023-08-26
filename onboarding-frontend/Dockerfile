@@ -8,12 +8,15 @@ COPY package-lock.json .
 RUN npm install --production
 # Copy app files
 COPY . .
-# Build the app
-RUN npm run build --production
 
 # Set environment variables
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
+# Build the app
+RUN npm run build --production
+
+
 
 # Bundle static assets with nginx
 FROM nginx:1.21.0-alpine as frontend-production
