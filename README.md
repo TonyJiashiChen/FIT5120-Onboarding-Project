@@ -5,6 +5,8 @@
 `cd onboarding-frontend`\
 `npm start`
 
+## Building frontend image with arg
+`docker buildx build --platform linux/amd64 --build-arg REACT_APP_API_URL=http://34.129.1.154:7999/api/ --push -t jirathipk/vic-emissions-frontend:latest .`
 
 **Using Docker for the frontend and backend (Dev)**\
 `docker-compose up -d`\
